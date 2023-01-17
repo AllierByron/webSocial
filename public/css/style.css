@@ -1,0 +1,107 @@
+body{
+    background-color: rgb(41, 46, 92);
+    margin: 0;
+
+}
+
+#muro{
+    background-color: white;
+    height: 250px;
+    width: 100%;
+}
+
+#foto{
+    background-color: aqua;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: black;
+    position: relative;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    margin-top: -50px;
+}
+
+#navegacion{
+    height: 50px;
+    width: 100%;
+    background-color: rgb(10, 13, 26);
+    color: white;
+    text-align: center;
+    margin-top: 0%;
+    position: fixed;
+    
+}
+
+#navegacion a{
+    float: left;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    height: 100%;
+    margin-right: 10%;
+    padding: 14px 16px;
+    
+    font-family: Copperplate, "Copperplate Gothic Light", fantasy;  
+}
+
+#navegacion div{
+    margin: auto;
+    width: 800px;
+}
+#nombre{
+    margin-left: 10px;
+    margin-bottom: 50px;
+    margin-top: -50px;
+}
+#cont{
+    height: 100%;
+    width: 50%;
+    /* margin: auto; */
+    background-color: black;
+    color: wheat;
+    /* margin-right: 0; */
+    /* text-align: center; */
+    /* margin-top: -10.075%; */
+}
+#user{
+    width: 25%;
+    height: 100%;
+    background-color: yellow;
+    /* position: relative; */
+    /* margin: 0%; */
+    /* float: left; */
+}
+#extra{
+    background-color: yellow;
+    /* float: right; */
+    width: 25%;/*
+    height: 100%;
+    position: relative;
+    margin: 0%;
+    float: right;
+    margin-top: 0%; */
+}
+.columnas {
+  float: left;
+  width: 25%;
+}
+.likes{
+    border-radius: 8px;
+    padding: 10px;
+    background-color: transparent;
+    color: white;
+    margin-left: 9px;
+}
+.likes option{
+    background-color: black;
+    color: white;
+}
+#filtros{
+    padding: 10px;
+}
+#t-extra{
+    text-align: center;
+}
+  
