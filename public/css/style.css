@@ -30,9 +30,14 @@ body{
     background-color: rgb(10, 13, 26);
     color: white;
     text-align: center;
-    margin-top: 0%;
-    position: fixed;
+    margin: 0%;
+    /* position: fixed; */
     
+}
+#navegacion ul{
+    list-style-type: none;
+    margin: auto;
+    width: 800px;
 }
 
 #navegacion a{
@@ -107,8 +112,13 @@ body{
 }
 
 #sec-inicial{
-    min-height: 200px;
+    /* min-height: 400px; */
     margin: auto;
     background-color: black;
     color: white;
+    width: 90%;
+}
+
+#sec-inicial h1{
+    color: yellow;
 }

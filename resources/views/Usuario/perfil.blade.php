@@ -9,8 +9,9 @@
 </head>
 <body>
     @include('navbar')
-    <div id="muro"><img src="" alt=""></div>
 
+    <div id="muro"><img src="" alt=""></div>
+    
     <div class="row">
         <div id="user" class="columnas"><!--izquierda-->
             <div id="foto"><img src="" alt=""></div>
