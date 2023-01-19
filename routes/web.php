@@ -17,3 +17,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::view('/usuario', 'Usuario/perfil');
+Route::view('/inicio', 'Usuario/inicio');

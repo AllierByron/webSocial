@@ -41,7 +41,7 @@ body{
     text-decoration: none;
     text-align: center;
     height: 100%;
-    margin-right: 10%;
+    margin-right: 6%;
     padding: 14px 16px;
     
     font-family: Copperplate, "Copperplate Gothic Light", fantasy;  
@@ -105,4 +105,10 @@ body{
 #t-extra{
     text-align: center;
 }
-  
+
+#sec-inicial{
+    min-height: 200px;
+    margin: auto;
+    background-color: black;
+    color: white;
+}
