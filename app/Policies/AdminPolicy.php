@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\usuario_comuni;
+use App\Models\admin;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UsuarioComuniPolicy
+class AdminPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class UsuarioComuniPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\usuario_comuni  $usuarioComuni
+     * @param  \App\Models\admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, usuario_comuni $usuarioComuni)
+    public function view(User $user, admin $admin)
     {
         //
     }
@@ -48,10 +48,10 @@ class UsuarioComuniPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\usuario_comuni  $usuarioComuni
+     * @param  \App\Models\admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, usuario_comuni $usuarioComuni)
+    public function update(User $user, admin $admin)
     {
         //
     }
@@ -60,10 +60,10 @@ class UsuarioComuniPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\usuario_comuni  $usuarioComuni
+     * @param  \App\Models\admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, usuario_comuni $usuarioComuni)
+    public function delete(User $user, admin $admin)
     {
         //
     }
@@ -72,10 +72,10 @@ class UsuarioComuniPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\usuario_comuni  $usuarioComuni
+     * @param  \App\Models\admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, usuario_comuni $usuarioComuni)
+    public function restore(User $user, admin $admin)
     {
         //
     }
@@ -84,10 +84,10 @@ class UsuarioComuniPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\usuario_comuni  $usuarioComuni
+     * @param  \App\Models\admin  $admin
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, usuario_comuni $usuarioComuni)
+    public function forceDelete(User $user, admin $admin)
     {
         //
     }

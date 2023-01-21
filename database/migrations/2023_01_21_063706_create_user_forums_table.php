@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('comunidads', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('descripcion');
+        Schema::create('user_forums', function (Blueprint $table) {
+            $table->foreignId('user_id');
+            $table->foreignId('forum_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('forum_id')->references('id')->on('forums');
             $table->string('estado');
-            $table->string('owner')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comunidads');
+        Schema::dropIfExists('user_forums');
     }
 };

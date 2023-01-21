@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\usuario_comuni;
-use App\Http\Requests\Storeusuario_comuniRequest;
-use App\Http\Requests\Updateusuario_comuniRequest;
+use App\Models\forum;
+use App\Http\Requests\StoreforumRequest;
+use App\Http\Requests\UpdateforumRequest;
 
-class UsuarioComuniController extends Controller
+class ForumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class UsuarioComuniController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\Storeusuario_comuniRequest  $request
+     * @param  \App\Http\Requests\StoreforumRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Storeusuario_comuniRequest $request)
+    public function store(StoreforumRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class UsuarioComuniController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\usuario_comuni  $usuario_comuni
+     * @param  \App\Models\forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function show(usuario_comuni $usuario_comuni)
+    public function show(forum $forum)
     {
         //
     }
@@ -53,10 +53,10 @@ class UsuarioComuniController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\usuario_comuni  $usuario_comuni
+     * @param  \App\Models\forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function edit(usuario_comuni $usuario_comuni)
+    public function edit(forum $forum)
     {
         //
     }
@@ -64,11 +64,11 @@ class UsuarioComuniController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\Updateusuario_comuniRequest  $request
-     * @param  \App\Models\usuario_comuni  $usuario_comuni
+     * @param  \App\Http\Requests\UpdateforumRequest  $request
+     * @param  \App\Models\forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function update(Updateusuario_comuniRequest $request, usuario_comuni $usuario_comuni)
+    public function update(UpdateforumRequest $request, forum $forum)
     {
         //
     }
@@ -76,10 +76,10 @@ class UsuarioComuniController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\usuario_comuni  $usuario_comuni
+     * @param  \App\Models\forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(usuario_comuni $usuario_comuni)
+    public function destroy(forum $forum)
     {
         //
     }

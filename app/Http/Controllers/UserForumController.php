@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\comunidad;
-use App\Http\Requests\StorecomunidadRequest;
-use App\Http\Requests\UpdatecomunidadRequest;
+use App\Models\user_forum;
+use App\Http\Requests\Storeuser_forumRequest;
+use App\Http\Requests\Updateuser_forumRequest;
 
-class ComunidadController extends Controller
+class UserForumController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +31,10 @@ class ComunidadController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorecomunidadRequest  $request
+     * @param  \App\Http\Requests\Storeuser_forumRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorecomunidadRequest $request)
+    public function store(Storeuser_forumRequest $request)
     {
         //
     }
@@ -42,10 +42,10 @@ class ComunidadController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Models\user_forum  $user_forum
      * @return \Illuminate\Http\Response
      */
-    public function show(comunidad $comunidad)
+    public function show(user_forum $user_forum)
     {
         //
     }
@@ -53,10 +53,10 @@ class ComunidadController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Models\user_forum  $user_forum
      * @return \Illuminate\Http\Response
      */
-    public function edit(comunidad $comunidad)
+    public function edit(user_forum $user_forum)
     {
         //
     }
@@ -64,11 +64,11 @@ class ComunidadController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatecomunidadRequest  $request
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Http\Requests\Updateuser_forumRequest  $request
+     * @param  \App\Models\user_forum  $user_forum
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatecomunidadRequest $request, comunidad $comunidad)
+    public function update(Updateuser_forumRequest $request, user_forum $user_forum)
     {
         //
     }
@@ -76,10 +76,10 @@ class ComunidadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Models\user_forum  $user_forum
      * @return \Illuminate\Http\Response
      */
-    public function destroy(comunidad $comunidad)
+    public function destroy(user_forum $user_forum)
     {
         //
     }

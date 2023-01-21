@@ -13,12 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('usuario_comunis', function (Blueprint $table) {
-            
-            $table->integer('ID_usuario')->references('id')->on('usuarios');
-            $table->integer('ID_com')->references('id')->on('comunidads');
+        Schema::create('admins', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->foreignId('forum_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('forum_id')->references('id')->on('forums');
             $table->string('estado');
-            $table->primary(['ID_usuario','ID_com']);
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('usuario_comunis');
+        Schema::dropIfExists('admins');
     }
 };

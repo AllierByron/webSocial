@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\comunidad;
+use App\Models\user_forum;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class ComunidadPolicy
+class UserForumPolicy
 {
     use HandlesAuthorization;
 
@@ -25,10 +25,10 @@ class ComunidadPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Models\user_forum  $userForum
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, comunidad $comunidad)
+    public function view(User $user, user_forum $userForum)
     {
         //
     }
@@ -48,10 +48,10 @@ class ComunidadPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Models\user_forum  $userForum
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, comunidad $comunidad)
+    public function update(User $user, user_forum $userForum)
     {
         //
     }
@@ -60,10 +60,10 @@ class ComunidadPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Models\user_forum  $userForum
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, comunidad $comunidad)
+    public function delete(User $user, user_forum $userForum)
     {
         //
     }
@@ -72,10 +72,10 @@ class ComunidadPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Models\user_forum  $userForum
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, comunidad $comunidad)
+    public function restore(User $user, user_forum $userForum)
     {
         //
     }
@@ -84,10 +84,10 @@ class ComunidadPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\comunidad  $comunidad
+     * @param  \App\Models\user_forum  $userForum
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, comunidad $comunidad)
+    public function forceDelete(User $user, user_forum $userForum)
     {
         //
     }
