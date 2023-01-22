@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class publication extends Model
 {
     use HasFactory;
+
+    public function comments(){
+        return $this->hasMany(comment::class);
+    }
+
+    //inversa
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function forum(){
+        return $this->belongsTo(forum::class);
+    }
 }

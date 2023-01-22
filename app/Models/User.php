@@ -44,16 +44,19 @@ class User extends Authenticatable
 
 
     //relaciones muchos : 1
-    public function comunidads(){
-        return $this->hasMany(comunidad::class);
+    public function forums(){
+        return $this->hasMany(forum::class);
     }
-    public function publicaciones(){
-        return $this->hasMany(publicaciones::class);
+    public function publications(){
+        return $this->hasMany(publication::class);
     }
-    public function comentarios(){
-        return $this->hasMany(comentarios::class);
+    public function comments(){
+        return $this->hasMany(comment::class);
     }
-    public function usuario_comuni(){
-        return $this->hasMany(usuario_comuni::class);
+    public function user_forums(){
+        return $this->hasMany(user_forum::class);
+    }
+    public function admins(){
+        return $this->hasMany(admin::class);
     }
 }
