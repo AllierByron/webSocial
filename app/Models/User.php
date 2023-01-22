@@ -57,6 +57,6 @@ class User extends Authenticatable
         return $this->hasMany(user_forum::class);
     }
     public function admins(){
-        return $this->hasMany(admin::class);
+        return $this->hasOne(admin::class);
     }
 }
