@@ -9,6 +9,14 @@ class user_forum extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'use_id',
+        'forum_id',
+        'estado'
+    ];
+
+
+
     //inversa
     public function user(){
         return $this->belongsTo(User::class);

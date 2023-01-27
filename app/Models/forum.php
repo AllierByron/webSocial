@@ -9,6 +9,16 @@ class forum extends Model
 {
     use HasFactory;
 
+
+    protected $fillable = [
+        'nombre',
+        'descripcion',
+        'estado',
+        'user_id'
+    ];
+
+
+
     public function publications(){
         return $this->hasMany(publication::class);
     }

@@ -9,6 +9,16 @@ class comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'publication_id',
+        'user_id',
+        'contenido',
+        'like',
+        'estado'
+    ];
+
+
+
     //inversa
     public function publication(){
         return $this->belongsTo(publication::class);

@@ -21,6 +21,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'descripcion',
+        'estado',
+        'fecha_nac',
+        'bool_18',
+        'facebook',
+        'twitter',
+        'instagram',
+        'telefono'
     ];
 
     /**
@@ -41,6 +49,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
 
 
     //relaciones muchos : 1

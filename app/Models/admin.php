@@ -9,6 +9,13 @@ class admin extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'forum_id',
+        'contenido'
+    ];
+
+
     //inversa
     public function user(){
         return $this->belongsTo(User::class);
