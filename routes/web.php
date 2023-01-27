@@ -16,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('/usuario', 'Usuario/perfil');
-Route::view('/inicio', 'Usuario/inicio');
+Route::view('/usuario/perfil', 'Usuario/perfil')->name('user');
+Route::view('/inicio', 'Usuario/inicio')->name('home');
+Route::view('/usuario/amigos', 'Usuario/amigos')->name('friends');
+Route::view('/usuario/seguidos', 'Usuario/seguidos')->name('subs');
+Route::view('/explorar', 'Exteriores/explorar')->name('expl');

@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ asset( 'css/style.css' ) }}">
-</head>
-<body>
-    @include('navbar')
+@extends('layouts.master')
 
-    <div id="muro"><img src="" alt=""></div>
-    
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+@endsection
+
+@section('content')
+
+    <div id="muro"><img src="" alt="Foto de Muro"></div>
+
     <div class="row">
         <div id="user" class="columnas"><!--izquierda-->
             <div id="foto"><img src="" alt=""></div>
-            <h1 id="nombre">Perfil De Usuario</h1>
+            <h1 id="nombre">Nombre De Usuario</h1>
         </div>
 
         <div id="cont" class="columnas">   <!--centro-->
@@ -24,7 +20,7 @@
                     <option value="0">Mas Likes</option>
                     <option value="1">Menos Likes</option>
                 </select>
-                <label for="likes" style="float: left;">Filtar por: </label>
+                <label class="filtro" for="likes" style="float: left;">Filtar por: </label>
 
             </div>
         </div>
@@ -34,6 +30,4 @@
         </div>
     </div>
     
-
-</body>
-</html>
+@endsection

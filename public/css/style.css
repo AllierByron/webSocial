@@ -1,13 +1,13 @@
-/*comentario de prueba*/ 
-/*2do comentario de prueba*/
+/*comentario de prueba*/
 body{
     background-color: rgb(41, 46, 92);
     margin: 0;
+    margin-top: 0%;
 }
 
 #muro{
     background-color: white;
-    height: 250px;
+    height: 300px;
     width: 100%;
 }
 
@@ -30,14 +30,9 @@ body{
     background-color: rgb(10, 13, 26);
     color: white;
     text-align: center;
-    margin: 0%;
-    /* position: fixed; */
+    margin-top: 0%;
+    position: fixed;
     
-}
-#navegacion ul{
-    list-style-type: none;
-    margin: auto;
-    width: 800px;
 }
 
 #navegacion a{
@@ -112,13 +107,14 @@ body{
 }
 
 #sec-inicial{
-    /* min-height: 400px; */
+    padding-top: 80px;
+    min-height: 160px;
     margin: auto;
     background-color: black;
     color: white;
-    width: 90%;
+    text-align: center;
 }
 
-#sec-inicial h1{
-    color: yellow;
+.titulos{
+    color: rgb(112, 245, 23);
 }
