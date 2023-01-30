@@ -3,6 +3,7 @@
 <head>
     @include('parts.head')
     @yield('css')
+    @yield('script')
     <title>RedSocial_Project</title>
 </head>
 <body>
@@ -10,5 +11,6 @@
 
     @yield('content')
     
+    @yield('footer')
 </body>
 </html>

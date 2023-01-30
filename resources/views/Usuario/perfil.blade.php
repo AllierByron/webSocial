@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endsection
 
+@section('script')
+@endsection
+
 @section('content')
 
     <div id="muro"><img src="" alt="Foto de Muro"></div>
@@ -30,4 +33,8 @@
         </div>
     </div>
     
+@endsection
+
+@section('footer')
+    @include('parts.footer')
 @endsection

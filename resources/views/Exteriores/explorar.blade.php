@@ -4,11 +4,18 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 @endsection
 
+@section('script')
+@endsection
+
 @section('content')
 
     <br>
-    <div id="sec-inicial">
+    <div class="sec-inicial">
         <h1 class="titulos">Explorar</h1>
     </div>
     
+@endsection
+
+@section('footer')
+    @include('parts.footer')
 @endsection

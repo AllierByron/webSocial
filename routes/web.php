@@ -21,3 +21,5 @@ Route::view('/inicio', 'Usuario/inicio')->name('home');
 Route::view('/usuario/amigos', 'Usuario/amigos')->name('friends');
 Route::view('/usuario/seguidos', 'Usuario/seguidos')->name('subs');
 Route::view('/explorar', 'Exteriores/explorar')->name('expl');
+Route::view('/contactos', 'Exteriores/contactos')->name('cntc');
+Route::view('/imagenLocal', 'img/ImgLocal')->name('LRS');
