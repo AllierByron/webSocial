@@ -3,6 +3,7 @@
 <head>
     @include('parts.head')
     @yield('css')
+    @yield('script')
     <title>RedSocial_Project</title>
 </head>
 <body>
@@ -27,5 +28,7 @@
         };
     </script>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script> --}}
+    
+    @yield('footer')
 </body>
 </html>

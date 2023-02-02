@@ -30,6 +30,7 @@ Route::view('/usuario/amigos', 'Usuario/amigos')->name('friends');
 Route::view('/usuario/seguidos', 'Usuario/seguidos')->name('subs');
 Route::view('/explorar', 'Exteriores/explorar')->name('expl');
 
+
 Route::get('/auth/facebook/redirect', function () {
     return Socialite::driver('facebook')->redirect();
 });
@@ -70,3 +71,5 @@ Route::view('/errorDeIn','layouts/sesion')->name('errorDeIn');
 //     //return $user->getId();
 // });
 
+Route::view('/contactos', 'Exteriores/contactos')->name('cntc');
+Route::view('/imagenLocal', 'img/ImgLocal')->name('LRS');

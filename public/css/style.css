@@ -4,6 +4,10 @@ body{
     margin: 0;
     margin-top: 0%;
 }
+a{
+    color: black;
+    text-decoration: none; /* no underline */
+}
 
 #muro{
     background-color: white;
@@ -106,7 +110,7 @@ body{
     text-align: center;
 }
 
-#sec-inicial{
+.sec-inicial{
     padding-top: 80px;
     min-height: 160px;
     margin: auto;
@@ -117,6 +121,144 @@ body{
 
 .titulos{
     color: rgb(112, 245, 23);
+    font-style: italic;
+}
+
+#footer{
+    position: absolute;
+    bottom: 0; 
+    width: 100%;
+    height: 3em;
+    /*padding: 10px; /* Some padding */
+    text-align: center; /* Center text*/
+    background: rgb(39, 39, 65); /* Grey background */
+}
+
+#footer a{
+    color: black;
+    font-size: large;
+    font-style: italic;
+    text-decoration: none; /* no underline */
+}
+#footer hr{
+    width: 80%;
+    border: 1px solid rgb(20, 20, 20);
+}
+
+/*/##/Test/#/Temporal/##/*/
+.cuerpo{
+    /*background-color: aqua;/**/
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.fila{
+    max-width: 55em;
+    margin: auto;
+    padding-bottom: 30px;
+}
+.fila::after{
+    /*background-color: antiquewhite;/**/
+    content: "";
+    display: table;
+    clear: both;
+}
+.columna{
+    background-color: rgb(39, 39, 65);
+    float: left;
+    width: fit-content;
+    min-width: 23em;
+    min-height: 33.4em;
+    padding: 30px;
+
+    /*border: 3px dashed black;/*Borde*/
+}
+
+#lugar, #map{
+    width: 376px;
+    height: 250px;
+    background-color: white;
+
+    border: 3px solid white; /*Borde*/
+}
+#map iframe{
+    width: 376px;
+    height: 250px;
+    border: 0;
+}
+
+hr.vertical{
+    float: left;
+    border:         none;
+    border-left:    4px solid rgb(33, 33, 43);
+    height:         36em;
+    width:          0px;  
+}
+
+#Inicio-sesion{
+    cursor: pointer;
+    margin-right: 70px;
+}
+
+/* codigo prueba del pop up para iniciar sesion */
+
+.popup .overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background:rgba(0, 0, 0, 0.7);
+    z-index: 1;
+    display: none;
+}
+
+ .popup .content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: #fff;
+    width: 850px;
+    height: 520px;
+    z-index: 2;
+    /* text-align: center; */
+    padding: 20px;
+    box-sizing: border-box;
+ }
+
+ .popup .close-btn{
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 30px;
+    height: 30px;
+    background: #222;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+ }
+
+ .popup.active .overlay{
+    display: block;
+ }
+ .popup.active .content{
+    transition: all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+ }
+
+/* fin del codigo de prueba */
+
+/* #titulo-InS{
+    float: left;
+    padding: 0%;
+} */
+#InS{
+    float: left;
 }
 
 #Inicio-sesion{
