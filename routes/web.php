@@ -31,6 +31,10 @@ Route::view('/usuario/seguidos', 'Usuario/seguidos')->name('subs');
 Route::view('/explorar', 'Exteriores/explorar')->name('expl');
 
 
+
+
+
+
 Route::get('/auth/facebook/redirect', function () {
     return Socialite::driver('facebook')->redirect();
 });

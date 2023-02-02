@@ -36,6 +36,7 @@ class UserController extends Controller
         
         //doble verificacion, la comprobacion de la existencia de $correo sirve para evitar un error de SQL
         //que avanza el auto_increment de la tabla users pero no registra ningun nuevo registro/tupla
+        //el metodo updateOrCreate simplemente verifica que no este creado el mismo usuario con la misma contraseña
         if(!$correo){
             $user = User::updateOrCreate(
                 [
