@@ -6,4 +6,8 @@
         <a href="{{ route('subs') }}">Seguidos</a>
         <a href="{{ route('friends') }}">Amigos</a>
     </div>
+    {{-- <button id="Inicio-sesion" ">Identificarse</button> --}}
+    <p href="" id="Inicio-sesion" style="float: right;" onclick="popupInS();">Identificarse</p>
 </ul>
+@include('layouts.sesion')
+

@@ -10,8 +10,14 @@
 
     <div class="row">
         <div id="user" class="columnas"><!--izquierda-->
-            <div id="foto"><img src="" alt=""></div>
+            @if(Auth::check()) <img src="{{auth()->user()->foto_perfil}}" alt="avatar" id="foto">
+            @else <div id="foto"></div>
+            @endif
             <h1 id="nombre">Nombre De Usuario</h1>
+            <br><br>
+            @if(!is_null(auth()->user()) && Auth::check())
+                <a href="https://www.facebook.com/search/people/?q={{auth()->user()->facebook}}" target="_blank">{{auth()->user()->facebook}}</a>
+            @endif
         </div>
 
         <div id="cont" class="columnas">   <!--centro-->

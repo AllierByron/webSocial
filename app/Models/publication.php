@@ -9,6 +9,15 @@ class publication extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'titulo',
+        'contenido',
+        'user_id',
+        'forum_id',
+        'estado'
+    ];
+
+
     public function comments(){
         return $this->hasMany(comment::class);
     }
