@@ -146,6 +146,7 @@ a{
 }
 
 /*/##/Test/#/Temporal/##/*/
+/*/##/Test/Mapa/Temporal/##/*/
 .cuerpo{
     /*background-color: aqua;/**/
     width: 100%;
@@ -195,134 +196,146 @@ hr.vertical{
     width:          0px;  
 }
 
-#Inicio-sesion{
+/*/^^/Test/Mapa/Temporal/^^/*/
+/*/##/Test/#/Temporal/##/*/
+
+/*/##/BottonOpcionesExtras/##/*/
+/*/##/BottonOpcionesExtras/##/*/
+
+.btnExtra{
+    position: relative;
+    right: 40px;
+    /* background-color: blue; */
+    max-width: 40px;
+    max-height: 40px;
+    width: 40px;
+    height: 40px;
+    float: right;
+    /* display: inline-block; */
     cursor: pointer;
-    margin-right: 70px;
+    padding: 5px;
 }
 
-/* codigo prueba del pop up para iniciar sesion */
+#linea1, #linea2, #linea3, .barraEsp{
+    float: none;
+    max-width: 30px;
+    height: 5px;
+    background-color: #ffffff;
+    margin: 5px 0;
+    margin-bottom: 5px;
+    transition: 0.4s;
+}
 
-.popup .overlay{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background:rgba(0, 0, 0, 0.7);
-    z-index: 1;
+.barraEsp{
+    background-color: rgb(10, 13, 26);
+}
+
+/* Rotate first bar */
+.change #linea1 {
+    transform: translate(0, 10px) rotate(-45deg);
+}
+  
+/* Fade out the second bar */
+.change #linea2 {opacity: 0;}
+  
+/* Rotate last bar */
+.change #linea3 {
+    transform: translate(0, -10px) rotate(45deg);
+}
+
+#opcExtra{
+    border-radius: 4px;
+    border-top-right-radius: 0;
+    right: 10px;
+    top: 40px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
     display: none;
+    position: absolute;
+    background-color: #3f4158;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+  
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+  
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #4a4c66;}
+  
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+/*/^^/BottonOpcionesExtras/^^/*/
+/*/##/BottonOpcionesExtras/##/*/
+
+
+
+/*/##/Test/#/Temporal/##/*/
+/*/##/Test/Config's/Temporal/##/*/
+
+.config{
+    float: left;
 }
 
- .popup .content{
+#configuration{
+    max-width: 60%;
+    width: 60%;
+    background-color: #3f4158;
+    float: none;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: #fff;
-    width: 850px;
-    height: 520px;
-    z-index: 2;
-    /* text-align: center; */
-    padding: 20px;
-    box-sizing: border-box;
- }
-
- .popup .close-btn{
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 30px;
-    width: 30px;
-    height: 30px;
-    background: #222;
-    color: #fff;
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 30px;
+    transform: translate(-50%, -50%);
     text-align: center;
-    border-radius: 50%;
- }
-
- .popup.active .overlay{
-    display: block;
- }
- .popup.active .content{
-    transition: all 300ms ease-in-out;
-    transform: translate(-50%, -50%) scale(1);
- }
-
-/* fin del codigo de prueba */
-
-/* #titulo-InS{
-    float: left;
-    padding: 0%;
-} */
-#InS{
-    float: left;
 }
 
-#Inicio-sesion{
-    cursor: pointer;
-    margin-right: 70px;
-}
+/*/^^/Test/Config's/Temporal/^^/*/
+/*/##/Test/#/Temporal/##/*/
 
-/* codigo prueba del pop up para iniciar sesion */
+/* Boton_1 Hover */
 
-.popup .overlay{
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background:rgba(0, 0, 0, 0.7);
-    z-index: 1;
-    display: none;
-}
-
- .popup .content{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    background: #fff;
-    width: 850px;
-    height: 520px;
-    z-index: 2;
-    /* text-align: center; */
-    padding: 20px;
-    box-sizing: border-box;
- }
-
- .popup .close-btn{
-    cursor: pointer;
-    position: absolute;
-    right: 20px;
-    top: 30px;
-    width: 30px;
-    height: 30px;
-    background: #222;
-    color: #fff;
-    font-size: 25px;
-    font-weight: 600;
-    line-height: 30px;
+.btnH {
+    padding: 10px 20px;
+    font-size: 20px;
     text-align: center;
-    border-radius: 50%;
- }
-
- .popup.active .overlay{
-    display: block;
- }
- .popup.active .content{
-    transition: all 300ms ease-in-out;
-    transform: translate(-50%, -50%) scale(1);
- }
-
-/* fin del codigo de prueba */
-
-/* #titulo-InS{
-    float: left;
-    padding: 0%;
-} */
-#InS{
-    float: left;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #f4511e;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #da4518;
 }
+  
+.btnH:hover {background-color: #f56235}
+  
+.btnH:active {
+    background-color: #da471a;
+    box-shadow: 0 5px #9c3212;
+    transform: translateY(4px);
+}
+
+/* Boton_1 Hover */
+
+
+
+/* Paypal */
+
+#PBOX{
+    margin: 20px;
+    min-width: 100px;
+    min-height: 100px;
+    /* display: none;
+    background-color: #4a4c66; */
+}
+
+/* Paypal */

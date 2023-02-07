@@ -6,8 +6,17 @@
         <a href="{{ route('subs') }}">Seguidos</a>
         <a href="{{ route('friends') }}">Amigos</a>
     </div>
-    {{-- <button id="Inicio-sesion" ">Identificarse</button> --}}
-    <p href="" id="Inicio-sesion" style="float: right;" onclick="popupInS();">Identificarse</p>
+    <div class="btnExtra" onclick="BarraExtra(this)">
+        <div class="barraEsp"></div>
+        <div id="linea1"></div>
+        <div class="barraEsp"></div>
+        <div id="linea2"></div>
+        <div class="barraEsp"></div>
+        <div id="linea3"></div>
+    </div>
 </ul>
-@include('layouts.sesion')
-
+<div id="opcExtra" class="dropdown-content">
+    <a href="{{ route('conf') }}">Config</a>
+    <a href="#">Opción 2</a>
+    <a href="#">Opción 3</a>
+</div>

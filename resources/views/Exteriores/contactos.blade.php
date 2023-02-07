@@ -8,7 +8,7 @@
     <!--API Geolocalización-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA0SItd16EjZBPWLX2n5ZPoUFMITAhIyaw&callback=initMap"
     defer></script>
-    <script src="{{ asset('map.js') }}"></script>
+    <script src="{{ asset('js/map.js') }}"></script>
     <!--API Geolocalización-->
 @endsection
 
@@ -25,18 +25,7 @@
             <div class="columna">
                 <!--Mapa-->
                 <div id="map">
-                    <!--iframe
-                    width="376"
-                    height="250"
-                    style="border:0"
-                    loading="lazy"
-                    allowfullscreen
-                    referrerpolicy="no-referrer-when-downgrade"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0SItd16EjZBPWLX2n5ZPoUFMITAhIyaw
-                    &q=+
-                    &center=20.7189905,-103.386793268
-                    &zoom=18">
-                    </iframe-->
+                    
                 </div>
                 <hr>
                 <!--Imagen-->
