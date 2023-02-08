@@ -15,7 +15,7 @@
         <div id="linea3"></div>
     </div>
 </ul>
-<div id="opcExtra" class="dropdown-content">
+<div id="opcExtra" class="dropdown-content-ext">
     <a href="{{ route('conf') }}">Config</a>
     <a href="#">Opción 2</a>
     <a href="#">Opción 3</a>

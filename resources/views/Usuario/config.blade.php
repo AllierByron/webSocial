@@ -5,8 +5,8 @@
 @endsection
 
 @section('script')
-    <script src="{{ asset('js/ppl.js') }}"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=Acu9ol5MF3N02fyg4A1bECbV1xq1CDJucLllRUi7iuxloWBwKR6qp1eWPXGRmnS0euqm17evX8w5dwhU"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Acu9ol5MF3N02fyg4A1bECbV1xq1CDJucLllRUi7iuxloWBwKR6qp1eWPXGRmnS0euqm17evX8w5dwhU"></script> {{--Llamada a la API de Paypal--}}
+    <script src="{{ asset('js/ppl.js') }}"></script> {{--Script para mostrar el contenedor de los botones--}}
 @endsection
 
 @section('content')
@@ -21,15 +21,25 @@
         <div class="fila">
             {{-- Columna izquieda --}}
             <div class="columna">
+
                 <h3>Cuenta Premium</h3>
-                <button id="cVIP" class="btnH" onclick="PyPal(this)">Comprar</button>
-                <div id="PBOX">
+                <button id="cVIP" class="btnH" onclick="PyPalBox(this)">Comprar</button> {{-- Boton para mostrar los metodos de pago --}}
+
+                {{-- Contenedor de los metodos de pago --}}
+                <div id="PBOX" class="dropdown-content-ext">
+                    <h4>Pago</h4>
+
+                    {{-- Llamada para mostrar los botones mediante el JavaScript SDK --}}
                     <div id="paypal-button-container">
                         <script>
                             paypal.Buttons().render('#paypal-button-container');
                         </script>
                     </div>
+                    {{-- Llamada para mostrar los botones mediante el JavaScript SDK --}}
+
                 </div>
+                {{-- Contenedor de los metodos de pago --}}
+
             </div>
             <hr class="vertical">
             {{-- Columna derecha --}}
