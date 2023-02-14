@@ -1,4 +1,4 @@
-<form id="enviar" onsubmit="return camposVacios();" action="{{asset('/crUsuario')}}" method="POST">
+<form id="enviar" onsubmit="return camposVacios();" action="{{asset('/crUsuario/1')}}" method="POST">
     @csrf
     <div class="popup" id="popup-1">
         <div class="overlay"></div>
@@ -17,7 +17,9 @@
                         <input type="password" name="password-InS" id="password-InS">
                         <br><br>
                         <button onclick="methodic('GET'); camposVacios();">Crear Cuenta</button>
-                        <button formaction="{{asset('/isUsuario')}}" onclick="methodic('POST'); ">Iniciar sesion</button>
+                        <button formaction="{{asset('/isUsuario/1')}}" onclick="methodic('POST'); ">Iniciar sesion</button>
+                        <br><br>
+                        <a href="{{url('/auth/google/redirect')}}" style="a#InSG:hover{color:blue;}" class="InSRS">Inciar con google</a>
                         <br><br>
                         @if(session('error'))<strong id="apartado-InS" style="color: red;"> {{session('error')}}</strong>@endif
                     @endif
@@ -27,7 +29,11 @@
                     @endif
                     <br><br>
                     @if(Auth::check())
-                        <a href="{{url('/auth/facebook/redirect')}}" {{--onclick="boton()"--}}>Conectar Facebook</a>
+                        @if(auth()->user()->facebook == null)
+                            <a href="{{url('/auth/facebook/redirect')}}" style="text-decoration: underline;" class="InSRS">Conectar Facebook</a>
+                        @else
+                            <p>Facebook conectado</p>
+                        @endif
                     @endif
                     <br><br>
                 </div>

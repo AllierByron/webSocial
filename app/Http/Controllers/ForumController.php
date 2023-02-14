@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\forum;
 use App\Http\Requests\StoreforumRequest;
 use App\Http\Requests\UpdateforumRequest;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Http\Request;
 
 class ForumController extends Controller
 {
@@ -23,9 +25,21 @@ class ForumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $foro = forum::where('nombre', $request->input('forumName'))->first();
+
+        if(!$foro){
+            forum::create([
+                'nombre'=> $request->input('forumName'),
+                'descripcion'=>$request->input('descripcion'),
+                'estado'=>'Activo',
+                'user_id'=>auth()->id()
+            ]);
+            return redirect()->route('crForo')->with('msj1','Comunidad creada correctamente');
+        }else{
+            return redirect()->route('crForo')->with('msj2','Comunidad existente');
+        }
     }
 
     /**
@@ -45,9 +59,14 @@ class ForumController extends Controller
      * @param  \App\Models\forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function show(forum $forum)
+    public static function show(/*forum $forum*/)
     {
-        //
+        // session(['saludo'=>'e hola']);
+
+        $forums = forum::select('id','nombre','descripcion')->get();
+
+        session(['foros'=>$forums]);
+
     }
 
     /**

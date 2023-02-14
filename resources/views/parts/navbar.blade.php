@@ -8,6 +8,7 @@
     </div>
     {{-- <button id="Inicio-sesion" ">Identificarse</button> --}}
     <p href="" id="Inicio-sesion" style="float: right;" onclick="popupInS();">Identificarse</p>
+    
 </ul>
 @include('layouts.sesion')
 

@@ -17,18 +17,8 @@
     
 
     @yield('content')
-    {{-- <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-            appId            : '5669421129846478',
-            autoLogAppEvents : true,
-            xfbml            : true,
-            version          : 'v15.0'
-            }); 
-        };
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script> --}}
-    
+
+    @php if(session('error')){echo '<script> document.getElementById("Inicio-sesion").click(); </script>';} @endphp
     @yield('footer')
 </body>
 </html>

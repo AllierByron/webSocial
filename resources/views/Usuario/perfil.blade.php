@@ -13,13 +13,18 @@
 
     <div class="row">
         <div id="user" class="columnas"><!--izquierda-->
-            @if(Auth::check()) <img src="{{auth()->user()->foto_perfil}}" alt="avatar" id="foto">
-            @else <div id="foto"></div>
+            @if(Auth::check()) 
+                <img src="{{auth()->user()->foto_perfil}}" alt="avatar" id="foto">
+                <h1 id="nombre">{{auth()->user()->name}}</h1>
+                <a href="{{asset('editUserStuff')}}"><button id="btn-editarPerfil">Editar Perfil</button></a>
+            @else 
+                <div id="foto"></div>
+                <h1 id="nombre">Nombre De Usuario</h1>
+                {{-- <button id="btn-editarPerfil">Editar Perfil</button> --}}
             @endif
-            <h1 id="nombre">Nombre De Usuario</h1>
             <br><br>
-            @if(!is_null(auth()->user()) && Auth::check())
-                <a href="https://www.facebook.com/search/people/?q={{auth()->user()->facebook}}" target="_blank">{{auth()->user()->facebook}}</a>
+            @if(Auth::check() && auth()->user()->facebook != null)
+                <a href="{{auth()->user()->facebook}}" target="_blank">{{auth()->user()->name}}</a>
             @endif
         </div>
 

@@ -27,34 +27,69 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, $id)
     {
         //
-        $handle = explode("@",$request->input('correo-InS'));
+        switch ($id) {
+            case 1:
+                $handle = explode("@",$request->input('correo-InS'));
         
-        $correo = User::where('email',$request->input('correo-InS'))->first();
-        
-        //doble verificacion, la comprobacion de la existencia de $correo sirve para evitar un error de SQL
-        //que avanza el auto_increment de la tabla users pero no registra ningun nuevo registro/tupla
-        //el metodo updateOrCreate simplemente verifica que no este creado el mismo usuario con la misma contraseña
-        if(!$correo){
-            $user = User::updateOrCreate(
-                [
-                    'name' => $handle[0],
-                    'estado'=> "Activo",
-                    'fecha_nac'=> "0001-01-01",
-                    'bool_18' => false,
-                    'email'=> $request->input('correo-InS'),
-                    'foto_perfil'=> 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
-                    'password' => $request->input('password-InS')
-                ]
-            );
-            
-            Auth::login($user);
-            
-            return redirect()->route('user');
-        }else{
-            return redirect()->route('user')->with('error', 'Otro usuario tiene el mismo correo');
+                $correo = User::where('email',$request->input('correo-InS'))->first();
+                
+                //doble verificacion, la comprobacion de la existencia de $correo sirve para evitar un error de SQL
+                //que avanza el auto_increment de la tabla users pero no registra ningun nuevo registro/tupla
+                //el metodo updateOrCreate simplemente verifica que no este creado el mismo usuario con la misma contraseña
+                if(!$correo){
+                    $user = User::updateOrCreate(
+                        [
+                            'name' => $handle[0],
+                            'estado'=> "Activo",
+                            'fecha_nac'=> "0001-01-01",
+                            'bool_18' => false,
+                            'email'=> $request->input('correo-InS'),
+                            'foto_perfil'=> 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
+                            'password' => $request->input('password-InS')
+                        ]
+                    );
+                    
+                    Auth::login($user);
+                    
+                    return redirect()->route('user');
+                }else{
+                    return redirect()->route('user')->with('error', 'Ya existe una cuenta con ese correo');
+                }
+                break;
+            case 2:
+                $userSocialite = Socialite::driver('google')->user();
+
+                $correo = User::where('email', $userSocialite->getEmail())->first();
+
+                if(!$correo){
+                    // dd($userSocialite);
+                    $user = User::updateOrCreate(
+                        [
+                            'name' => $userSocialite->getName(),
+                            'estado'=> "Activo",
+                            'fecha_nac'=> "0001-01-01",
+                            'bool_18' => false,
+                            'email'=> $userSocialite->getEmail(),
+                            'foto_perfil'=> $userSocialite->getAvatar()
+                        ]
+                    );
+                    
+                    Auth::login($user);
+                
+                    return redirect()->route('user');
+
+                }else{
+                    return UserController::show($request,2);
+                    //return redirect()->route('user')->with('error', 'Ya existe una cuenta con ese correo');
+                }
+                
+                break;
+            default:
+                return "error";
+                break;
         }
     }
 
@@ -64,40 +99,27 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     $userSocialite = Socialite::driver('facebook')->user();
-        
-    //     $user = User::updateOrCreate(
-    //                 [
-    //                     'name' => $userSocialite->getName(),
-    //                     'estado'=> "Activo",
-    //                     'fecha_nac'=> "2009-12-31",
-    //                     'bool_18' => false,
-    //                     'email'=> $userSocialite->getEmail(),
-    //                     'foto_perfil'=> $userSocialite->getAvatar(),
-    //                     'password' => '12345'
-    //                 ]
-    //             );
-                
-    //     Auth::login($user);
-        
-    //     return redirect()->route('user');
-    // }
 
-    //solo para registrarse con nuestro formulario
-    public function store(Request $request)
+    //Añadido de FB
+    public function store(Request $request,$id)
     {
-        $userSocialite = Socialite::driver('facebook')->user();
+        switch ($id) {
+            case 'facebook':
+                $userSocialite = Socialite::driver('facebook')->user();
 
-        // dd($userSocialite);
-        if(Auth::check()){
-            $user = User::find(auth()->user()->id);
-            $user->facebook = $userSocialite->getName();
-            $user->save();
-            return redirect()->route('user');
-        }else{
-            return redirect()->route('user')->with('error','Usuario no encontrado');
+                // dd($userSocialite);
+                if(Auth::check()){
+                    $user = User::find(auth()->user()->id);
+                    $user->facebook = "https://www.facebook.com/search/people/?q=".$userSocialite->getName();
+                    $user->save();
+                    return redirect()->route('user');
+                }else{
+                    return redirect()->route('user')->with('error','Usuario no encontrado');
+                }
+                break;
+            default:
+                # code...
+                break;
         }
     }
 
@@ -107,18 +129,48 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(Request $request, $id)
     {
         //
-        $user = User::where('email', $request->input('correo-InS'))->where('password',$request->input('password-InS'))->first();
-        if($user){
-            // echo "si existe, ".$user;
-            Auth::login($user);
-            return redirect()->route('user');
-        }else{
-            // echo "no existe";
-            echo '<script> document.getElementById("apartado-InS").InnerHTML = "Error";</script>';
-            return redirect()->route('user')->with('error','Usuario no encontrado');
+        switch ($id) {
+            //caso 1 para usuarios que ingresaron manualmente su correo y contraseña
+            case 1:
+
+                $user = User::where('email', $request->input('correo-InS'))
+                            ->where('password',$request->input('password-InS'))
+                            ->where('estado','Activo')->first();
+                if($user){
+                    // echo "si existe, ".$user;
+                    Auth::login($user);
+                    return redirect()->route('user');
+                }else{
+                    // echo "no existe";
+                    echo '<script> document.getElementById("apartado-InS").InnerHTML = "Error";</script>';
+                    return redirect()->route('home')->with('error','Usuario no encontrado');
+                }
+
+                break;
+            //caso 2 para usuarios que crearon su cuenta mediante google, no hay contraseña regsitrada, solo correo
+            case 2:
+                $userSocialite = Socialite::driver('google')->user();
+
+                $user = User::where('email', $userSocialite->getEmail())
+                            ->where('estado','Activo')->first();
+
+                if($user){
+                    // echo "si existe, ".$user;
+                    Auth::login($user);
+                    return redirect()->route('user');
+                }else{
+                    // echo "no existe";
+                    echo '<script> document.getElementById("apartado-InS").InnerHTML = "Error";</script>';
+                    return redirect()->route('user')->with('error','Usuario no encontrado');
+                }
+
+                break;
+            default:
+                # code...
+                break;
         }
     }
 
@@ -150,6 +202,30 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        switch($id){
+            //actualizar aspectos del perfil
+            case 1:
+                $foto_perfil = "";
+
+                if($request->input('avatar') != ""){
+                    $foto_perfil = $request->input('avatar');
+                }else if($request->input('img-elegida') != ""){
+                    $foto_perfil = $request->input('img-elegida');
+                }else{
+                    $foto_perfil = auth()->user()->foto_perfil;
+                }
+
+                User::where('email',auth()->user()->email)
+                      ->update(array('name'=> $request->input('name'),
+                                     'facebook'=> $request->input('urlFB'),
+                                     'foto_perfil'=> $foto_perfil));
+                return redirect()->route('home');
+
+            case 2:
+                break;
+            default:
+                breaK;
+        }
     }
 
     /**
