@@ -13,7 +13,7 @@ class admin extends Model
     protected $fillable = [
         'user_id',
         'forum_id',
-        'contenido'
+        'estado'
     ];
 
     //inversa

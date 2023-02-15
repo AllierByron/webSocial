@@ -7,6 +7,7 @@ use App\Http\Requests\StoreforumRequest;
 use App\Http\Requests\UpdateforumRequest;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ForumController extends Controller
 {
@@ -36,6 +37,15 @@ class ForumController extends Controller
                 'estado'=>'Activo',
                 'user_id'=>auth()->id()
             ]);
+
+            $foro_id = forum::select('id')->where('nombre', $request->input('forumName'))->first();
+
+            $AdminController = new AdminController();
+            $UserForumController = new UserForumController();
+            
+            $AdminController->create(auth()->id(),$foro_id->id);
+            $UserForumController->create(auth()->id(),$foro_id->id);
+
             return redirect()->route('crForo')->with('msj1','Comunidad creada correctamente');
         }else{
             return redirect()->route('crForo')->with('msj2','Comunidad existente');

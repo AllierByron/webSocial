@@ -54,12 +54,9 @@
 
 @section('content')
 
-    {{-- @php echo App\Http\Controllers\PublicationController::show(1);  @endphp --}}
-
-
     <br>
     <div class="sec-inicial" >
-        <h1 class="titulos">{{ session('forumName')}}</h1>
+        <h1 class="titulos">{{ session('forum')->nombre}}</h1>
     </div>
     <br><br><br>
     <div class="row">
@@ -68,11 +65,11 @@
         </div>
         <div id="cont"class="columnas" style="background-color:transparent;">
                 <div>
-                    <div style="float: right;" id="postear"><i class="fa fa-plus"></i> <a href="{{asset('/createPublication')}}">Crear post</a></div>
+                    <div style="float: right;" id="postear"><i class="fa fa-plus"></i> <a href="{{asset('/definePublication')}}">Crear post</a></div>
             @if(count(session('data')) == 0)
                     <h2 style="float:left;">No hay posts</h3>
                 </div>
-            @else
+            @else(false)
                 @foreach(session('data') as $d)
                     <div id="contendor-publicacion-de-comunidad" style="background-color:white; margin:auto; min-height: 100px; min-width: 100%; display: inline-block;display: inline-block;">
                         <div>
@@ -93,16 +90,20 @@
                                 <div id="titulo" style="font-size: 25px;">
                                     <strong>{{$d->titulo}}</strong>   
                                 </div>
-                                <div id="Descripcion" style="{{--background-color:blue;width:100%;--}}">
-                                    {{$d->descripcion}}
-                                </div>
+                                @if($d->descripcion != null)
+                                    <div id="Descripcion" style="{{--background-color:blue;width:100%;--}}">
+                                        {{$d->descripcion}}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         {{-- <br> --}}
-                        <div id="contenido{{-- el contenido pueden ser imgs, videos, gifs, etc. Puede existir o no--}}" style="padding:20px 0px; margin:auto; width:100%; background-color:rgb(237, 237, 237); float:left; text-align:center;">
-                            {{-- <img src="https://i.redd.it/n5wke2jnq5ga1.jpg" alt="" width="70%" height="70%">     --}}
-                            <img src="{{url($d->contenido)}}" alt="" width="70%" height="70%">    
-                        </div>
+                        @if($d->contenido != null)
+                            <div id="contenido{{-- el contenido pueden ser imgs, videos, gifs, etc. Puede existir o no--}}" style="padding:20px 0px; margin:auto; width:100%; background-color:rgb(237, 237, 237); float:left; text-align:center;">
+                                {{-- <img src="https://i.redd.it/n5wke2jnq5ga1.jpg" alt="" width="70%" height="70%">     --}}
+                                <img src="{{url($d->contenido)}}" alt="" width="70%" height="70%"> 
+                            </div>
+                        @endif
                         <div id="comentarios" style="padding:0px 0px 28px 0px; margin:auto; text-align:center; background-color:black; height:10px; float:left; width: 100%;">
                             <button><a href="{{asset('/pub/')}}">Comentarios</a></button>
                         </div>

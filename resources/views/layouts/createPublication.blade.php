@@ -15,15 +15,16 @@
     <div id="contenido">
         <h1>Publica</h1>
         <br>
-        <form action="{{asset('/createForum')}}" method="POST">
+        <form action="{{asset('/createPublication')}}" method="POST">
             <div id="campos-editables">
                 @csrf
+                <input type="hidden" name="forumID" id="forumID" value="{{session('forum')->id}}">
                 <label for="name">Titulo: </label>
-                <input type="text" name="forumName" id="name" value="" required>
+                <input type="text" name="postName" id="name" value="" required>
                 <br><br>
                 <label for="urlFB">Descripcion: </label>
                 {{-- este input sigue teniendo el id "urlFB" debido al css --}}
-                <input type="text" name="descripcion" id="urlFB" value="" required>
+                <input type="text" name="postDesc" id="urlFB" value="">
                 <br><br>
                 <label for="content">URL(img, videos, gifs) </label>
                 <input type="text" id="content" name="content" value="">

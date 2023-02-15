@@ -23,9 +23,13 @@ class UserForumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($user_id, $forum_id)
     {
-        //
+        user_forum::create([
+            'user_id'=> $user_id,
+            'forum_id'=>$forum_id,
+            'estado'=>'Activo'
+        ]);
     }
 
     /**

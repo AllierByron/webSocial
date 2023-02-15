@@ -68,7 +68,8 @@ Route::get('/forum/{id}/{forum_id}', 'App\Http\Controllers\PublicationController
 Route::post('/createForum', 'App\Http\Controllers\ForumController@create');
 Route::view('/defineForum', 'layouts/createForum')->name('crForo');
 
-Route::view('/createPublication', 'layouts/createPublication')->name('crPubli');
+Route::post('/createPublication', 'App\Http\Controllers\PublicationController@create');
+Route::view('/definePublication', 'layouts/createPublication')->name('crPubli');
 
 Route::post('/update/{id}','App\Http\Controllers\UserController@update')->name('update');
 Route::view('/contactos', 'Exteriores/contactos')->name('cntc');

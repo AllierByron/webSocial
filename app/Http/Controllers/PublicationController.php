@@ -8,6 +8,8 @@ use App\Http\Requests\UpdatepublicationRequest;
 use Illuminate\Support\Facades\Http;
 use App\Models\forum;
 use Laravel\Sail\Console\PublishCommand;
+use Illuminate\Http\Request;
+
 
 class PublicationController extends Controller
 {
@@ -26,9 +28,19 @@ class PublicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        publication::create([
+            'titulo'=>$request->input('postName'),
+            'descripcion'=>$request->input('postDesc'),
+            'contenido'=>$request->input('content'),
+            'user_id'=>auth()->id(),
+            'forum_id'=>$request->input('forumID'),
+            'estado'=>'Activo'
+        ]);
+
+        return redirect()->route('expl');
+        // echo "forumID: ".$request->input('forumID');
     }
 
     /**
@@ -64,16 +76,16 @@ class PublicationController extends Controller
             case 2:
 
                 $pubs = publication::where('forum_id', $forum_id)->get();
-                $forumName = forum::select('nombre')->where('id',$forum_id)->first();
+                $forum = forum::where('id',$forum_id)->where('estado','Activo')->first();
+
+                // dd(json_decode($pubs));
 
                 if(!$pubs){
                     return redirect()->route('forum')->with('noForums', 'no foros');
                 }else{
-                    session(['data'=>$pubs,'forumName'=> $forumName->nombre]);
-
+                    session(['data'=>json_decode($pubs),'forum'=> $forum]);
                     return redirect()->route('forum');
                 }
-
 
                 break;
             default:

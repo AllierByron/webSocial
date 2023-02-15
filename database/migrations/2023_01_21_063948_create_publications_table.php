@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->string('descripcion')->nullable();
+            $table->text('descripcion')->nullable();
             $table->string('contenido')->nullable();
             $table->foreignId('user_id');
             $table->foreignId('forum_id');
