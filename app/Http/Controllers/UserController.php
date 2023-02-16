@@ -66,7 +66,7 @@ class UserController extends Controller
 
                 if(!$correo){
                     // dd($userSocialite);
-                    $user = User::updateOrCreate(
+                    $user = User::updateOrCreate(   
                         [
                             'name' => $userSocialite->getName(),
                             'estado'=> "Activo",

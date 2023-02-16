@@ -73,7 +73,7 @@ class ForumController extends Controller
     {
         // session(['saludo'=>'e hola']);
 
-        $forums = forum::select('id','nombre','descripcion')->get();
+        $forums = forum::select('id','nombre','descripcion')->where('estado','Activo')->get();
 
         session(['foros'=>$forums]);
 
