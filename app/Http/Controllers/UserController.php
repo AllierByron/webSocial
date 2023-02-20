@@ -54,7 +54,8 @@ class UserController extends Controller
                     
                     Auth::login($user);
                     
-                    return redirect()->route('user');
+                    // return redirect()->route('user');
+                    return redirect()->route('obtainPosts',['id'=>3]);
                 }else{
                     return redirect()->route('user')->with('error', 'Ya existe una cuenta con ese correo');
                 }
@@ -79,7 +80,9 @@ class UserController extends Controller
                     
                     Auth::login($user);
                 
-                    return redirect()->route('user');
+                    // return redirect()->route('user');
+                    return redirect()->route('obtainPosts',['id'=>3]);
+
 
                 }else{
                     return UserController::show($request,2);
@@ -112,7 +115,8 @@ class UserController extends Controller
                     $user = User::find(auth()->user()->id);
                     $user->facebook = "https://www.facebook.com/search/people/?q=".$userSocialite->getName();
                     $user->save();
-                    return redirect()->route('user');
+                    // return redirect()->route('user');
+                    return redirect()->route('obtainPosts',['id'=>3]);
                 }else{
                     return redirect()->route('user')->with('error','Usuario no encontrado');
                 }
@@ -142,7 +146,10 @@ class UserController extends Controller
                 if($user){
                     // echo "si existe, ".$user;
                     Auth::login($user);
-                    return redirect()->route('user');
+
+                    // return redirect()->route('user');
+                    return redirect()->route('obtainPosts',['id'=>3]);
+
                 }else{
                     // echo "no existe";
                     echo '<script> document.getElementById("apartado-InS").InnerHTML = "Error";</script>';
@@ -150,7 +157,7 @@ class UserController extends Controller
                 }
 
                 break;
-            //caso 2 para usuarios que crearon su cuenta mediante google, no hay contraseña regsitrada, solo correo
+            //caso 2 para usuarios que crearon su cuenta mediante google, no hay contraseña registrada, solo correo
             case 2:
                 $userSocialite = Socialite::driver('google')->user();
 
@@ -160,7 +167,10 @@ class UserController extends Controller
                 if($user){
                     // echo "si existe, ".$user;
                     Auth::login($user);
-                    return redirect()->route('user');
+
+                    // return redirect()->route('user');
+                    return redirect()->route('obtainPosts',['id'=>3]);
+
                 }else{
                     // echo "no existe";
                     echo '<script> document.getElementById("apartado-InS").InnerHTML = "Error";</script>';

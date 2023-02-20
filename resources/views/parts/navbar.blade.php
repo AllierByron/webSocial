@@ -1,8 +1,12 @@
 <ul id="navegacion">
     <div>
         <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('user') }}">Perfil</a>
-        <a href="{{ route('expl') }}">Explorar</a>
+        @if(!Auth::check())
+            <a href="{{ route('user') }}">Perfil</a>
+        @else
+            <a href="{{ asset('/usuarioPosts/3') }}">Perfil</a>
+        @endif
+        <a href="{{ route('expl',['id'=>1]) }}">Explorar</a>
         <a href="{{ route('subs') }}">Seguidos</a>
         <a href="{{ route('friends') }}">Amigos</a>
     </div>

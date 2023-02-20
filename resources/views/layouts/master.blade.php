@@ -18,6 +18,7 @@
 
     @yield('content')
 
+    @yield('scriptsv2'){{--puse este 2dp yield para el JS que necesita que todo el doc cargue --}}
     @php if(session('error')){echo '<script> document.getElementById("Inicio-sesion").click(); </script>';} @endphp
     @yield('footer')
 </body>

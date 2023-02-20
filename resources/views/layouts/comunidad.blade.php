@@ -49,6 +49,7 @@
         function lotoco(){
 
         }
+
     </script>
 @endsection
 

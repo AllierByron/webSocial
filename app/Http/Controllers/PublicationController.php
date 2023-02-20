@@ -39,7 +39,7 @@ class PublicationController extends Controller
             'estado'=>'Activo'
         ]);
 
-        return redirect()->route('expl');
+        return redirect()->route('expl',['id'=>1]);
         // echo "forumID: ".$request->input('forumID');
     }
 
@@ -60,7 +60,7 @@ class PublicationController extends Controller
      * @param  \App\Models\publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public static function show($id, $forum_id)
+    public static function show($id, $forum_id = 0)
     {
         switch ($id) {
             //el primer caso es solo para la api de memes
@@ -80,12 +80,24 @@ class PublicationController extends Controller
 
                 // dd(json_decode($pubs));
 
-                if(!$pubs){
+                if(!$pubs){ 
                     return redirect()->route('forum')->with('noForums', 'no foros');
                 }else{
                     session(['data'=>json_decode($pubs),'forum'=> $forum]);
                     return redirect()->route('forum');
                 }
+
+                break;
+            case 3:
+                $pubs = publication::where('user_id',auth()->id())->get();
+
+                if($pubs){
+                    session(['data'=>json_decode($pubs)]);
+                }else{
+                    session(['data'=>""]);
+                }
+
+                return redirect()->route('user');
 
                 break;
             default:

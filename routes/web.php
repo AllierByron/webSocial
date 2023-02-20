@@ -10,6 +10,7 @@ use Laravel\Socialite\Facades\Socialite;
 use Psy\Readline\Hoa\Console;
 use Illuminate\Support\Facades\Auth;
 use App\Models\publication;
+use App\Http\Controllers\ForumController;
 
 
 
@@ -32,10 +33,10 @@ Route::view('/usuario/perfil', 'Usuario/perfil')->name('user');
 Route::view('/inicio', 'Usuario/inicio')->name('home');
 Route::view('/usuario/amigos', 'Usuario/amigos')->name('friends');
 Route::view('/usuario/seguidos', 'Usuario/seguidos')->name('subs');
-Route::view('/explorar', 'Exteriores/explorar')->name('expl');
-// Route::get('/primero', 'App\Http\Controllers\ForumController@show')->name('expl');
-// Route::view('/comunidad/{idCommunity}','layouts/comunidad')->name('dede');
-// Route::get('/comunidad/{idCommunity}','App\Http\Controllers\PublicationController@show');
+//la ruta /explorar con el name expl fue remplazada por la siguiente(esta pasa por el controlador y trae datos):
+Route::resource('explorar', ForumController::class, ['names'=>['index'=>'expl']]);
+
+Route::get('/usuarioPosts/{id}', 'App\Http\Controllers\PublicationController@show')->name('obtainPosts');
 
 /* las siguientes rutas son para la conexion a google y FB */
 Route::get('/auth/facebook/redirect', function () {
@@ -70,6 +71,8 @@ Route::view('/defineForum', 'layouts/createForum')->name('crForo');
 
 Route::post('/createPublication', 'App\Http\Controllers\PublicationController@create');
 Route::view('/definePublication', 'layouts/createPublication')->name('crPubli');
+
+// Route::get('/posts/{id}','');
 
 Route::post('/update/{id}','App\Http\Controllers\UserController@update')->name('update');
 Route::view('/contactos', 'Exteriores/contactos')->name('cntc');

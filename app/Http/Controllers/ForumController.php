@@ -16,9 +16,41 @@ class ForumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        switch ($request->input('id')) {
+            case 1:
+                $forums = forum::select('id','nombre','descripcion')->where('estado','Activo')->get();
+                // dd($forums);
+                return view('Exteriores/explorar')->with('foros', $forums);
+                break;
+            case 2:
+                $forums = forum::select('id','nombre','descripcion')->where('user_id',auth()->id())->where('estado','Activo')->get();
+                // dd($forums);
+                $temp = json_decode($forums);
+                foreach ($temp as $t) {
+                    $opc = 0;
+                    if($t->nombre == "Memes"){
+                        $opc = 1;
+                    }else{
+                        $opc = 2;
+                    }
+
+                    $t->url = asset('/forum/'.$opc.'/'.$t->id);
+                }
+
+                $forums = json_encode($temp);
+
+                return $forums;
+                break;
+            default:
+                return "";
+                # code...
+                break;
+        }
+
+        
     }
 
     /**
@@ -71,12 +103,7 @@ class ForumController extends Controller
      */
     public static function show(/*forum $forum*/)
     {
-        // session(['saludo'=>'e hola']);
-
-        $forums = forum::select('id','nombre','descripcion')->where('estado','Activo')->get();
-
-        session(['foros'=>$forums]);
-
+        //
     }
 
     /**

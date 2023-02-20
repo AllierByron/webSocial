@@ -39,8 +39,6 @@
 
 @section('content')
 
-    @php echo App\Http\Controllers\ForumController::show();  @endphp
-
     <br>
     <div class="sec-inicial">
         <h1 class="titulos">Explorar</h1>
@@ -60,8 +58,8 @@
                 </div>
                 <br><br>
                 
-                @if(count(session('foros')) != 0) 
-                    @foreach (session('foros') as $foro)
+                @if(count($foros) != 0) 
+                    @foreach ($foros as $foro)
                         {{-- la comunidad de memes es generada por una api, por lo tanto esta necesita obtener su informacion de otro lado
                         que no es la base de datos. Con la variable opc logro definir a que parte del controlador se tiene que ir la
                         consulta --}}
@@ -74,7 +72,7 @@
                             </a>
                         </div>
                     @endforeach
-                @elseif(count(session('foros')) == 0)
+                @elseif(count($foros) == 0)
                     <h1>No hay comunidades</h1>
                 @endif
                 
