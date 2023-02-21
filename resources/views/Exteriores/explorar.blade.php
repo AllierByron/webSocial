@@ -75,9 +75,6 @@
                 @elseif(count($foros) == 0)
                     <h1>No hay comunidades</h1>
                 @endif
-                
-
-                
             </div>
             <div id="extra" class="columnas" style="backgroun-color:green;">
                 

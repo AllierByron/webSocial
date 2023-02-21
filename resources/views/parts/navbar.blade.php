@@ -4,7 +4,8 @@
         @if(!Auth::check())
             <a href="{{ route('user') }}">Perfil</a>
         @else
-            <a href="{{ asset('/usuarioPosts/3') }}">Perfil</a>
+            {{-- <a href="{{ asset('/usuarioPosts/3') }}">Perfil</a> --}}
+            <a href="{{ route('showP',3) }}">Perfil</a>
         @endif
         <a href="{{ route('expl',['id'=>1]) }}">Explorar</a>
         <a href="{{ route('subs') }}">Seguidos</a>

@@ -11,9 +11,7 @@ use Psy\Readline\Hoa\Console;
 use Illuminate\Support\Facades\Auth;
 use App\Models\publication;
 use App\Http\Controllers\ForumController;
-
-
-
+use App\Http\Controllers\PublicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +50,7 @@ Route::post('/isUsuario/{id}','App\Http\Controllers\UserController@show');
 Route::post('/outUsuario','App\Http\Controllers\UserController@logout');
 /* temrmino de las rutas para la conexion a google y FB */
 
-Route::view('/publication','layouts/publication')->name('publi');
+Route::view('/publicationMeme','layouts/publicationMeme')->name('publi');
 Route::get('/pub/{title}/{meme}/{subreddit}/{author}/{postlink}',function($title, $meme, $subreddit, $author, $postlink){
     return redirect()->route('publi')
                      ->with('titulo',$title)
@@ -61,6 +59,8 @@ Route::get('/pub/{title}/{meme}/{subreddit}/{author}/{postlink}',function($title
                      ->with('author',$author)
                      ->with('postlink','https://redd.it/'.$postlink);
 });
+
+Route::resource('/publication', PublicationController::class, ['names'=>['index'=>'pub', 'show'=>'showP']]);
 
 Route::view('/comunidadMemes', 'layouts/comunidadmemes')->name('forumMemes');
 Route::view('/comunidad', 'layouts/comunidad')->name('forum');

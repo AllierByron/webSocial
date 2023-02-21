@@ -18,9 +18,19 @@ class PublicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        $post = publication::where('publications.id', $request->input(('id')))
+                             ->join('forums','forums.id','=','publications.forum_id')
+                             ->join('users','users.id','=','publications.user_id')
+                             ->select('publications.*','forums.nombre','users.name','users.foto_perfil')
+                             ->get();
+        
+        $post = json_decode($post);
+
+        // dd($post);
+        return view('layouts/publication')->with('post', $post);
     }
 
     /**
@@ -75,7 +85,10 @@ class PublicationController extends Controller
                 break;
             case 2:
 
-                $pubs = publication::where('forum_id', $forum_id)->get();
+                $pubs = publication::where('forum_id', $forum_id)
+                                     ->join('users','publications.user_id','=','users.id')
+                                     ->select('publications.*','users.name','users.foto_perfil')
+                                     ->get();
                 $forum = forum::where('id',$forum_id)->where('estado','Activo')->first();
 
                 // dd(json_decode($pubs));
@@ -84,19 +97,27 @@ class PublicationController extends Controller
                     return redirect()->route('forum')->with('noForums', 'no foros');
                 }else{
                     session(['data'=>json_decode($pubs),'forum'=> $forum]);
+                    // return dd(session('data'));
                     return redirect()->route('forum');
                 }
 
                 break;
             case 3:
-                $pubs = publication::where('user_id',auth()->id())->get();
+                $pubs = publication::where('publications.user_id',auth()->id())
+                                    ->join('forums','forums.id','=','publications.forum_id')
+                                    ->join('users','users.id','=','publications.user_id')
+                                    ->select('publications.*','forums.nombre','users.name','users.foto_perfil')
+                                    ->get();
 
                 if($pubs){
                     session(['data'=>json_decode($pubs)]);
+                    foreach (session('data') as $deta) {
+                        $deta->url = asset('/forum/2/'.$deta->forum_id);
+                    }
                 }else{
                     session(['data'=>""]);
-                }
-
+                }   
+                // dd(session('data'));
                 return redirect()->route('user');
 
                 break;

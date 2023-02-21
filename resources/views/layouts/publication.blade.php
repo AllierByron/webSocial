@@ -44,13 +44,9 @@
 @endsection
 
 @section('content')
-
-    {{-- @php echo App\Http\Controllers\PublicationController::show();  @endphp --}}
-
-
     <br>
     <div class="sec-inicial" >
-        <h1 class="titulos">{{-- Titulo de la comunidad --}}</h1>
+        <h1 class="titulos">{{$post[0]->nombre}}</h1>
     </div>
     <br><br><br>
     <div class="row">
@@ -58,50 +54,32 @@
             <p> </p>
         </div>
         <div id="cont"class="columnas" style="background-color:transparent;" >
-                <div id="contendor-publicacion-de-comunidad" style="background-color:white; margin:auto; min-height: 100px; min-width: 100%; display: inline-block;display: inline-block;">
-                    <div>
-                        <div id="points" style="float:left; padding:10px; color:black;">
-                            <div id="upvote" >
-                                <i class="fa fa-arrow-up" id="upvote"></i>
-                            </div>
-                            <p style="text-align: center;">0</p>
-                            <div id="downvote" style="{{--background-color:blue;--}} width:100%;">
-                                <i class="fa fa-arrow-down" id="downvote"></i>
-                            </div>
-                        </div>
-                
-                        <div id="header-publicacion" style="float:left; padding:10px; {{--background-color:orange;--}} min-height: 40px; width: 87%; color:black;">
-                            <div style="font-size: 10px; color:gray;">
-                                <p>Nombre Usuario   ||    Nombre comunidad</p>
+            <div id="contenedor-post" style="min-height: 100px; width: 100%; display: inline-block;">
+                <div style="float: left; width: 50px; height: 50px; background-color:rgb(0, 0, 105); display: inline-block;"><img src="{{$post[0]->foto_perfil}}" alt="" width= "50px" height="50px"></div>
+                <div id="contendor-publicacion-de-comunidad" style="background-color:rgb(10, 0, 82); min-height: 100px; width: 92%; display: inline-block; float:right;">
+                    <div style="">
+                        <div id="header-publicacion" style="float:left; padding:10px; min-height: 40px; width: 87%; color:black;">
+                            <div style="font-size: 10px; color:rgb(213, 211, 211);">
+                                <p>{{$post[0]->name}}</p>
                             </div>
                             <div id="titulo" style="font-size: 25px;">
-                                <strong>{{session('titulo')}}</strong> 
+                                <strong style="color:white;">{{$post[0]->titulo}}</strong>   
                             </div>
-                            <div id="Descripcion" style="{{--background-color:blue;width:100%;--}}">
-                                {{-- <p>
-                                    Descripcion de la publicacion no puede ser que esto sea asi,
-                                    espero no tener que lidiar con esto si es que pongo mucho texto en una descipcion que
-                                    dejame decirte, no es normal que no pueda poner un descripcion tan grande porque existen
-                                    post que dejarian mucho texto y no se si esta interfaz esta preparada para eso
-                                    al parecer si jajajam.
-                                </p> --}}
-                            </div>
+                            @if($post[0]->descripcion != null)
+                                <div id="Descripcion" style="color:white;">
+                                    {{$post[0]->descripcion}}
+                                </div>
+                            @endif
                         </div>
                     </div>
                     {{-- <br> --}}
-                    <div id="contenido{{-- el contenido pueden ser imgs, videos, gifs, etc. Puede existir o no--}}" style="padding:20px 0px; margin:auto; width:100%; background-color:rgb(237, 237, 237); float:left; text-align:center;">
-                        {{-- <img src="https://i.redd.it/n5wke2jnq5ga1.jpg" alt="" width="70%" height="70%">     --}}
-                        <img src="{{session('meme')}}" alt="" width="70%" height="70%">    
-                    </div>
-                    {{-- <div id="comentarios" style="padding:0px 0px 28px 0px; margin:auto; text-align:center; background-color:black; height:10px; float:left; width: 100%;">
-                        <button>Comentarios</button>
-                    </div> --}}
+                    @if($post[0]->contenido != null)
+                        <div id="contenido{{-- el contenido pueden ser imgs, videos, gifs, etc. Puede existir o no--}}" style="padding:20px 0px; margin:auto; width:100%; background-color:rgb(8, 0, 50); float:left; text-align:center;">
+                            <img src="{{url($post[0]->contenido)}}" alt="" width="70%" height="70%"> 
+                        </div>
+                    @endif
                 </div>
-
-                <h2>Especificaciones</h2>
-                <h3>Obtenido del subreddit: {{session('subreddit')}} </h3>
-                <h3>Autor: {{session('author')}}</h3>
-                <h3>Post OG: <a href="{{session('postlink')}}" target="_blank">{{session('titulo')}}</a> </h3>
+            </div>
 
 
          </div>
@@ -109,8 +87,6 @@
              <p> </p>
          </div>
     </div>
-
-
 @endsection
 
 @section('footer')
