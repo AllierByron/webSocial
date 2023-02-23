@@ -25,6 +25,10 @@
         button#comments:hover{
             background-color: red;
         }
+        
+        .updateComm{
+            color: red;
+        }
         a{
             color: white;
         }
@@ -37,16 +41,15 @@
         #postear:hover{
             background-color:rgb(51, 98, 51);
         }
+        #btnLike{
+            all:unset;
+            type:button;
+        }
     </style>
 @endsection
 
-@section('script')
-    <script>
-        function lotoco(){
-
-        }
-
-    </script>
+@section('scriptsv2')
+    <script src="{{asset('js/toggleLike.js')}}"></script>
 @endsection
 
 @section('content')
@@ -72,6 +75,9 @@
                         <div style="float: left; width: 50px; height: 50px; background-color:rgb(0, 0, 105); display: inline-block;"><img src="{{$d->foto_perfil}}" alt="" width= "50px" height="50px"></div>
                         <div id="contendor-publicacion-de-comunidad" style="background-color:rgb(10, 0, 82); min-height: 100px; width: 92%; display: inline-block; float:right;">
                             <div style="">
+                                <input type="hidden" name="pub-id" id="pub-id" value="{{$d->id}}">
+                                @php $metod = explode("/",$d->url_like);   @endphp
+                                <input type="hidden" name="url-like" id="url-like" value="{{$metod[3]}}">
                                 <div id="header-publicacion" style="float:left; padding:10px; min-height: 40px; width: 87%; color:black;">
                                     <div style="font-size: 10px; color:rgb(213, 211, 211);">
                                         <p>{{$d->name}}</p>
@@ -94,7 +100,7 @@
                             @endif
                             <div id="comentarios" style="padding:0px 0px 28px 0px; margin:auto; text-align:center; background-color:black; height:10px; float:left; width: 100%;">
                                 <button id="comments"><a href="{{route('pub',['id'=>$d->id])}}">Comentarios</a></button>
-                                <i class="fa fa-heart" id="like" style="padding:7px; float:right;"></i>
+                                <button id="btnLike" style="padding:7px; float:right;"  class="{{$d->id}}"><i class="fa fa-heart {{$d->url_like}}"  onclick="like(this.className);"  id="like" ></i></button>
                             </div>
                         </div>
                     </div>

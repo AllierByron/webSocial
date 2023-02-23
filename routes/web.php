@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Models\User;
 use App\Models\forum;
 use GuzzleHttp\Promise\Create;
@@ -61,6 +62,9 @@ Route::get('/pub/{title}/{meme}/{subreddit}/{author}/{postlink}',function($title
 });
 
 Route::resource('/publication', PublicationController::class, ['names'=>['index'=>'pub', 'show'=>'showP']]);
+
+Route::get('/crComment/{id}/{pub_id}', [CommentController::class, 'create']);
+Route::get('/upComment/{id}/{com_id}', [CommentController::class, 'update']);
 
 Route::view('/comunidadMemes', 'layouts/comunidadmemes')->name('forumMemes');
 Route::view('/comunidad', 'layouts/comunidad')->name('forum');

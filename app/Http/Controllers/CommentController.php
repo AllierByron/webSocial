@@ -13,9 +13,14 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($pub_id)
     {
         //
+        $like = comment::select('like')
+                        ->where('estado', 'Activo')
+                        ->where('publication_id',$pub_id)
+                        ->first();
+        
     }
 
     /**
@@ -23,9 +28,35 @@ class CommentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id, $pub_id)
     {
         //
+        switch ($id) {
+            case 1:
+                $comment = Comment::where('user_id', auth()->id())
+                                    ->where('estado', 'Activo')
+                                    ->where('publication_id',$pub_id)
+                                    ->first();
+
+                if(!$comment){
+                    $like = comment::create([
+                        'publication_id'=> $pub_id,
+                        'user_id'=> auth()->id(),
+                        'like'=>true,
+                        'estado'=>'Activo'
+                    ]);
+                    $like = json_decode($like);
+                    return "asset('updateComm/2/".$like->id."')";
+                }else{
+                    CommentController::update(1, json_decode($comment));
+                }
+
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 
     /**
@@ -48,6 +79,7 @@ class CommentController extends Controller
     public function show(comment $comment)
     {
         //
+
     }
 
     /**
@@ -68,9 +100,30 @@ class CommentController extends Controller
      * @param  \App\Models\comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatecommentRequest $request, comment $comment)
+    public function update($id, $com_id)
     {
         //
+        switch ($id) {
+            case 1:
+                $comment = comment::find($com_id->id);
+                $comment->like = true;
+                $comment->save();
+                return "asset('updateComm/2/".$comment->id."')";
+
+                break;
+            case 2:
+                $comment = comment::find($com_id);
+                $comment->like = false;
+                $comment->save();
+
+                // return "asset('crear/1/".$comment->publication_id."')";
+                return $comment->like;
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 
     /**

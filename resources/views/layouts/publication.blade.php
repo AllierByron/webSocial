@@ -80,8 +80,6 @@
                     @endif
                 </div>
             </div>
-
-
          </div>
          <div id="extra" class="columnas" style="background-color:transparent;"><!--derecha-->
              <p> </p>

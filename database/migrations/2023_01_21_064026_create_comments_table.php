@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->foreign('publication_id')->references('id')->on('publications');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('contenido');
+            $table->string('contenido')->nullable();
             $table->boolean('like');
             $table->string('estado');
             $table->timestamps();

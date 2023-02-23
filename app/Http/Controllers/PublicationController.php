@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\publication;
+use App\Models\comment;
 use App\Http\Requests\StorepublicationRequest;
 use App\Http\Requests\UpdatepublicationRequest;
 use Illuminate\Support\Facades\Http;
@@ -22,6 +23,7 @@ class PublicationController extends Controller
     {
         //
         $post = publication::where('publications.id', $request->input(('id')))
+                             ->where('publications.estado', 'Activo')
                              ->join('forums','forums.id','=','publications.forum_id')
                              ->join('users','users.id','=','publications.user_id')
                              ->select('publications.*','forums.nombre','users.name','users.foto_perfil')
@@ -86,6 +88,7 @@ class PublicationController extends Controller
             case 2:
 
                 $pubs = publication::where('forum_id', $forum_id)
+                                     ->where('publications.estado', 'Activo')
                                      ->join('users','publications.user_id','=','users.id')
                                      ->select('publications.*','users.name','users.foto_perfil')
                                      ->get();
@@ -97,13 +100,30 @@ class PublicationController extends Controller
                     return redirect()->route('forum')->with('noForums', 'no foros');
                 }else{
                     session(['data'=>json_decode($pubs),'forum'=> $forum]);
-                    // return dd(session('data'));
-                    return redirect()->route('forum');
+                    
+                    foreach (session('data') as $deta) {
+                        $like = comment::where('user_id', auth()->id())
+                                        ->where('estado', 'Activo')
+                                        ->where('publication_id',$deta->id)
+                                        ->where('like', true)
+                                        ->first();
+
+                        if(!$like){
+                            $deta->url_like = asset('/crComment/1/'.$deta->id);
+                        }else{
+                            $deta->url_like = asset('/upComment/2/'.$like->id);
+                        }
+                    }
+
+                    // dd(session('data'));
+                    // return redirect()->route('forum');
+                    return view('layouts/comunidad');
                 }
 
                 break;
             case 3:
                 $pubs = publication::where('publications.user_id',auth()->id())
+                                    ->where('publications.estado', 'Activo')
                                     ->join('forums','forums.id','=','publications.forum_id')
                                     ->join('users','users.id','=','publications.user_id')
                                     ->select('publications.*','forums.nombre','users.name','users.foto_perfil')
@@ -112,22 +132,20 @@ class PublicationController extends Controller
                 if($pubs){
                     session(['data'=>json_decode($pubs)]);
                     foreach (session('data') as $deta) {
+
                         $deta->url = asset('/forum/2/'.$deta->forum_id);
                     }
                 }else{
                     session(['data'=>""]);
                 }   
                 // dd(session('data'));
-                return redirect()->route('user');
+                return view('Usuario/perfil');
 
                 break;
             default:
                 # code...
                 break;
         }
-
-        // return dd($memesRea->memes);
-        // return redirect()->route('dede');
 
     }
 

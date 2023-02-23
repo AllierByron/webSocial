@@ -37,11 +37,6 @@
 @endsection
 
 @section('script')
-    <script>
-        function lotoco(){
-
-        }
-    </script>
 @endsection
 
 @section('content')
