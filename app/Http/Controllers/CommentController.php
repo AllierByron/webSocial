@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\comment;
 use App\Http\Requests\StorecommentRequest;
 use App\Http\Requests\UpdatecommentRequest;
+use stdClass;
 
 class CommentController extends Controller
 {
@@ -46,9 +47,10 @@ class CommentController extends Controller
                         'estado'=>'Activo'
                     ]);
                     $like = json_decode($like);
-                    return "asset('updateComm/2/".$like->id."')";
+                    $ruta = asset('upComment/2/'.$like->id);
+                    return $ruta;
                 }else{
-                    CommentController::update(1, json_decode($comment));
+                   return json_encode(CommentController::update(1, json_decode($comment)));
                 }
 
                 break;
@@ -108,16 +110,23 @@ class CommentController extends Controller
                 $comment = comment::find($com_id->id);
                 $comment->like = true;
                 $comment->save();
-                return "asset('updateComm/2/".$comment->id."')";
+                $ruta = comment::select('publication_id')->where('id',$com_id->id)->get();
+                $ruta = json_decode($ruta);
+                $ruta[0]->url = asset('upComment/2/'.$comment->id);
+                // json_encode($ruta);
+                return $ruta;
 
                 break;
             case 2:
                 $comment = comment::find($com_id);
                 $comment->like = false;
                 $comment->save();
-
+                $ruta = comment::select('publication_id')->where('id',$com_id)->get();
+                $ruta = json_decode($ruta);
+                $ruta[0]->url = asset('crComment/1/'.$comment->publication_id);
+                json_encode($ruta);
+                return $ruta;
                 // return "asset('crear/1/".$comment->publication_id."')";
-                return $comment->like;
                 break;
             
             default:

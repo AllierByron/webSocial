@@ -100,7 +100,7 @@
                             @endif
                             <div id="comentarios" style="padding:0px 0px 28px 0px; margin:auto; text-align:center; background-color:black; height:10px; float:left; width: 100%;">
                                 <button id="comments"><a href="{{route('pub',['id'=>$d->id])}}">Comentarios</a></button>
-                                <button id="btnLike" style="padding:7px; float:right;"  class="{{$d->id}}"><i class="fa fa-heart {{$d->url_like}}"  onclick="like(this.className);"  id="like" ></i></button>
+                                <button id="btnLike" style="padding:7px; float:right;" ><i class="fa fa-heart {{$d->url_like}} {{$d->id}}"  onclick="like(this.className);" id="like" ></i></button>
                             </div>
                         </div>
                     </div>
