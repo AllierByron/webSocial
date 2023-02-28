@@ -31,8 +31,13 @@ class PublicationController extends Controller
         
         $post = json_decode($post);
 
-        // dd($post);
-        return view('layouts/publication')->with('post', $post);
+        $comments = new CommentController();
+        $commentss = $comments->show(1,$post[0]->id);
+
+        // session(['post'=> $post, 'comments'=> $commentss]);
+        // dd(session('post'));
+        // dd(session('comments'));
+        return view('layouts/publication')->with('post', $post)->with('comments', $commentss);
     }
 
     /**

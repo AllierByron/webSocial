@@ -80,9 +80,35 @@
                     @endif
                 </div>
             </div>
-         </div>
+            <div>
+                <h2>Comentarios</h2>
+
+                <form action="{{asset('/crComment/2/'.$post[0]->id)}}">
+                    @csrf
+                    <textarea name="comment" id="comment" cols="100" rows="10" style="resize: none;" required></textarea>
+                    <button type="submit">Comentar</button>
+                </form>
+                <br><br>
+                @if($comments !== null)
+                    @if(count($comments) != 0)
+                        @foreach($comments as $comment)
+                            @for ($i = 1; $i < count($comment->comentarios); $i++)
+                                @php $commentSingle = $comment->comentarios[$i] @endphp
+                                <strong><p>{{$comment->nombre}}</p></strong>
+                                <p>{{$commentSingle}}</p>
+                                <br><br>
+                            @endfor
+                        @endforeach
+                    @else
+                        No se ha comentado nada!
+                    @endif
+                @else
+                    No se ha comentado nada!
+                @endif
+            </div>
+        </div>
          <div id="extra" class="columnas" style="background-color:transparent;"><!--derecha-->
-             <p> </p>
+             <p></p>
          </div>
     </div>
 @endsection
