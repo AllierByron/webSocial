@@ -10,12 +10,10 @@ class user_forum extends Model
     use HasFactory;
 
     protected $fillable = [
-        'use_id',
+        'user_id',
         'forum_id',
         'estado'
     ];
-
-
 
     //inversa
     public function user(){

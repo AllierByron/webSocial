@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('descripcion');
+            $table->string('descripcion')->nullable();
             $table->string('estado');
             $table->date('fecha_nac');
             $table->boolean('bool_18');
@@ -25,8 +25,9 @@ return new class extends Migration
             $table->string('twitter')->nullable();
             $table->string('instagram')->nullable();
             $table->integer('telefono')->nullable();
+            $table->string('foto_perfil')->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

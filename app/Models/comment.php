@@ -18,7 +18,6 @@ class comment extends Model
     ];
 
 
-
     //inversa
     public function publication(){
         return $this->belongsTo(publication::class);

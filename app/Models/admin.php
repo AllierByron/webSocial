@@ -9,12 +9,12 @@ class admin extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
         'user_id',
         'forum_id',
-        'contenido'
+        'estado'
     ];
-
 
     //inversa
     public function user(){

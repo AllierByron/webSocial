@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\forum;
 use App\Http\Requests\StoreforumRequest;
 use App\Http\Requests\UpdateforumRequest;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ForumController extends Controller
 {
@@ -13,9 +16,41 @@ class ForumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+        switch ($request->input('id')) {
+            case 1:
+                $forums = forum::select('id','nombre','descripcion')->where('estado','Activo')->get();
+                // dd($forums);
+                return view('Exteriores/explorar')->with('foros', $forums);
+                break;
+            case 2:
+                $forums = forum::select('id','nombre','descripcion')->where('user_id',auth()->id())->where('estado','Activo')->get();
+                // dd($forums);
+                $temp = json_decode($forums);
+                foreach ($temp as $t) {
+                    $opc = 0;
+                    if($t->nombre == "Memes"){
+                        $opc = 1;
+                    }else{
+                        $opc = 2;
+                    }
+
+                    $t->url = asset('/forum/'.$opc.'/'.$t->id);
+                }
+
+                $forums = json_encode($temp);
+
+                return $forums;
+                break;
+            default:
+                return "";
+                # code...
+                break;
+        }
+
+        
     }
 
     /**
@@ -23,9 +58,30 @@ class ForumController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $foro = forum::where('nombre', $request->input('forumName'))->first();
+
+        if(!$foro){
+            forum::create([
+                'nombre'=> $request->input('forumName'),
+                'descripcion'=>$request->input('descripcion'),
+                'estado'=>'Activo',
+                'user_id'=>auth()->id()
+            ]);
+
+            $foro_id = forum::select('id')->where('nombre', $request->input('forumName'))->first();
+
+            $AdminController = new AdminController();
+            $UserForumController = new UserForumController();
+            
+            $AdminController->create(auth()->id(),$foro_id->id);
+            $UserForumController->create(auth()->id(),$foro_id->id);
+
+            return redirect()->route('crForo')->with('msj1','Comunidad creada correctamente');
+        }else{
+            return redirect()->route('crForo')->with('msj2','Comunidad existente');
+        }
     }
 
     /**
@@ -45,7 +101,7 @@ class ForumController extends Controller
      * @param  \App\Models\forum  $forum
      * @return \Illuminate\Http\Response
      */
-    public function show(forum $forum)
+    public static function show(/*forum $forum*/)
     {
         //
     }

@@ -28,7 +28,9 @@ class User extends Authenticatable
         'facebook',
         'twitter',
         'instagram',
-        'telefono'
+        'telefono',
+        'foto_perfil',
+        'password'
     ];
 
     /**
