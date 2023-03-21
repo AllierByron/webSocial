@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/slideshow.css') }}">
     <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')}}">
     <style>
         i#like:hover{
@@ -40,8 +41,8 @@
     </style>
 @endsection
 
-@section('script')
-
+@section('scriptsv2')
+    <script src="{{asset('js/slideshow.js')}}"></script>
 @endsection
 
 @section('content')
@@ -51,7 +52,7 @@
     <div class="row">
         <div id="user" class="columnas"><!--izquierda-->
             @if(Auth::check()) 
-                <img src="{{auth()->user()->foto_perfil}}" alt="avatar" id="foto">
+                <img src="{{asset('img/'.auth()->user()->foto_perfil)}}" alt="avatar" id="foto">
                 <h1 id="nombre">{{auth()->user()->name}}</h1>
                 <a href="{{asset('editUserStuff')}}"><button id="btn-editarPerfil">Editar Perfil</button></a>
             @else 
@@ -97,7 +98,15 @@
                                     {{-- <br> --}}
                                     @if($d->contenido != null)
                                         <div id="contenido{{-- el contenido pueden ser imgs, videos, gifs, etc. Puede existir o no--}}" style="padding:20px 0px; margin:auto; width:100%; background-color:rgb(8, 0, 50); float:left; text-align:center;">
-                                            <img src="{{url($d->contenido)}}" alt="" width="70%" height="70%"> 
+                                            {{-- <img src="{{url($d->contenido)}}" alt="" width="70%" height="70%">  --}}
+                                            {{-- <img src="@php if(is_array($d->contenido)){echo asset('img/posts/'.$d->contenido[1]);}else{echo $d->contenido;} @endphp" alt="" width="70%" height="70%">  --}}
+                                            <?php
+                                                if(is_array($d->contenido)){
+                                            ?>
+                                                    @include('Usuario/slideshow')
+                                            <?php
+                                                }else{echo '<img src="'.url($d->contenido).'" alt="" width="70%" height="70%">';}
+                                            ?>
                                         </div>
                                     @endif
                                     <div id="comentarios" style="padding:0px 0px 28px 0px; margin:auto; text-align:center; background-color:black; height:10px; float:left; width: 100%;">

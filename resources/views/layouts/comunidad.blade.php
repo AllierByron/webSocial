@@ -2,6 +2,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/slideshow.css') }}">
     <link rel="stylesheet" href="{{url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')}}">
     <style>
         i#like:hover{
@@ -50,6 +51,7 @@
 
 @section('scriptsv2')
     <script src="{{asset('js/toggleLike.js')}}"></script>
+    <script src="{{asset('js/slideshow.js')}}"></script>
 @endsection
 
 @section('content')
@@ -72,7 +74,7 @@
             @else(false)
                 @foreach(session('data') as $d)
                     <div id="contenedor-post" style="min-height: 100px; width: 100%; display: inline-block;">
-                        <div style="float: left; width: 50px; height: 50px; background-color:rgb(0, 0, 105); display: inline-block;"><img src="{{$d->foto_perfil}}" alt="" width= "50px" height="50px"></div>
+                        <div style="float: left; width: 50px; height: 50px; background-color:rgb(0, 0, 105); display: inline-block;"><img src="{{asset('img/'.$d->foto_perfil)}}" alt="" width= "50px" height="50px"></div>
                         <div id="contendor-publicacion-de-comunidad" style="background-color:rgb(10, 0, 82); min-height: 100px; width: 92%; display: inline-block; float:right;">
                             <div style="">
                                 <input type="hidden" name="pub-id" id="pub-id" value="{{$d->id}}">
@@ -95,7 +97,15 @@
                             {{-- <br> --}}
                             @if($d->contenido != null)
                                 <div id="contenido{{-- el contenido pueden ser imgs, videos, gifs, etc. Puede existir o no--}}" style="padding:20px 0px; margin:auto; width:100%; background-color:rgb(8, 0, 50); float:left; text-align:center;">
-                                    <img src="{{url($d->contenido)}}" alt="" width="70%" height="70%"> 
+                                    {{-- <img src="{{url($d->contenido)}}" alt="" width="70%" height="70%">  --}}
+                                    {{-- <img src="@php if(is_array($d->contenido)){echo $d->contenido[0];}else{echo $d->contenido;} @endphp" alt="" width="70%" height="70%">  --}}
+                                    <?php
+                                        if(is_array($d->contenido)){
+                                    ?>
+                                            @include('Usuario/slideshow')
+                                    <?php
+                                        }else{echo '<img src="'.url($d->contenido).'" alt="" width="70%" height="70%">';}
+                                    ?>
                                 </div>
                             @endif
                             <div id="comentarios" style="padding:0px 0px 28px 0px; margin:auto; text-align:center; background-color:black; height:10px; float:left; width: 100%;">

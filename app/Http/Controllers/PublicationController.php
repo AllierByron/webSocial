@@ -31,6 +31,18 @@ class PublicationController extends Controller
         
         $post = json_decode($post);
 
+        $contenido = explode('/',$post[0]->contenido);
+        // echo $contenido[0];
+        if($contenido[0] != 'https:' && $contenido[0] != ""){
+            // echo "Entre\n".$deta->id;
+            $arrayTemp = [];
+            $arrayContents = explode('fId'.$post[0]->forum_id.'pId'.$post[0]->id, $post[0]->contenido);
+            for ($i = 0; $i < count($arrayContents)-1; $i++) {
+                    $arrayTemp[$i] =  $arrayContents[$i];
+            }
+            $post[0]->contenido = $arrayTemp;
+        }
+
         $comments = new CommentController();
         $commentss = $comments->show(1,$post[0]->id);
 
@@ -47,14 +59,27 @@ class PublicationController extends Controller
      */
     public function create(Request $request)
     {
-        publication::create([
+        // dd(count($request->file('content')));
+        $pub = publication::create([
             'titulo'=>$request->input('postName'),
             'descripcion'=>$request->input('postDesc'),
-            'contenido'=>$request->input('content'),
+            // 'contenido'=>$request->input('content'),
             'user_id'=>auth()->id(),
             'forum_id'=>$request->input('forumID'),
             'estado'=>'Activo'
         ]);
+
+        $pubInsertContent = publication::find($pub->id);
+
+        $destino = 'img/posts/';
+        for ($i=0; $i < count($request->file('content')); $i++) { 
+            $nombreFoto = $request->file('content')[$i]->getClientOriginalName();
+            $request->file('content')[$i]->move($destino, $nombreFoto);
+            $pubInsertContent->contenido .= $nombreFoto.'fId'.$request->input('forumID').'pId'.$pub->id;
+            $pubInsertContent->save();
+        }
+
+        // dd($pub);
 
         return redirect()->route('expl',['id'=>1]);
         // echo "forumID: ".$request->input('forumID');
@@ -104,14 +129,28 @@ class PublicationController extends Controller
                 if(!$pubs){ 
                     return redirect()->route('forum')->with('noForums', 'no foros');
                 }else{
+                    //primero decodifico la info y la pongo en la variable de sesion
                     session(['data'=>json_decode($pubs),'forum'=> $forum]);
-                    
+                    //ya que esta decodificada agrego la url al comentario
                     foreach (session('data') as $deta) {
                         $like = comment::where('user_id', auth()->id())
                                         ->where('estado', 'Activo')
                                         ->where('publication_id',$deta->id)
                                         ->where('like', true)
                                         ->first();
+
+                        //seccion para decodificar las imgs que estan en los posts
+                        $contenido = explode('/',$deta->contenido);
+                        // echo $contenido[0];
+                        if($contenido[0] != 'https:' && $contenido[0] != ""){
+                            // echo "Entre\n".$deta->id;
+                            $arrayTemp = [];
+                            $arrayContents = explode('fId'.$deta->forum_id.'pId'.$deta->id, $deta->contenido);
+                            for ($i = 0; $i < count($arrayContents)-1; $i++) {
+                                    $arrayTemp[$i] =  $arrayContents[$i];
+                            }
+                            $deta->contenido = $arrayTemp;
+                        }
 
                         if(!$like){
                             $deta->url_like = asset('/crComment/1/'.$deta->id);
@@ -136,10 +175,23 @@ class PublicationController extends Controller
 
                 if($pubs){
                     session(['data'=>json_decode($pubs)]);
+                    
                     foreach (session('data') as $deta) {
-
+                        $contenido = explode('/',$deta->contenido);
+                        // echo $contenido[0];
+                        if($contenido[0] != 'https:' && $contenido[0] != ""){
+                            // echo "Entre\n".$deta->id;
+                            $arrayTemp = [];
+                            $arrayContents = explode('fId'.$deta->forum_id.'pId'.$deta->id, $deta->contenido);
+                            for ($i = 0; $i < count($arrayContents)-1; $i++) {
+                                 $arrayTemp[$i] =  $arrayContents[$i];
+                            }
+                            $deta->contenido = $arrayTemp;
+                        }
                         $deta->url = asset('/forum/2/'.$deta->forum_id);
                     }
+
+                    // dd(session('data'));
                 }else{
                     session(['data'=>""]);
                 }   

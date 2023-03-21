@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use League\CommonMark\Node\Block\Document;
 
 class UserController extends Controller
@@ -47,8 +48,8 @@ class UserController extends Controller
                             'fecha_nac'=> "0001-01-01",
                             'bool_18' => false,
                             'email'=> $request->input('correo-InS'),
-                            'foto_perfil'=> 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
-                            'password' => $request->input('password-InS')
+                            'foto_perfil'=> 'userIconpng.png',
+                            'password' => Hash::make($request->input('password-InS'))
                         ]
                     );
                     
@@ -141,9 +142,18 @@ class UserController extends Controller
             case 1:
 
                 $user = User::where('email', $request->input('correo-InS'))
-                            ->where('password',$request->input('password-InS'))
+                            // ->where('password',$request->input('password-InS'))
                             ->where('estado','Activo')->first();
-                if($user){
+                // dd($user->password);
+                $enter = false;
+                if(Hash::check($request->input('password-InS'), $user->password)){
+                    $enter = true;
+                }else if($request->input('password-InS') == $user->password){
+                    $enter = true;
+                }
+
+                // if($user){
+                if($enter){
                     // echo "si existe, ".$user;
                     Auth::login($user);
 
@@ -215,26 +225,32 @@ class UserController extends Controller
         switch($id){
             //actualizar aspectos del perfil
             case 1:
-                $foto_perfil = "";
+                // $foto_perfil = "";
+                // dd($request);
+                $origen = "";
 
-                if($request->input('avatar') != ""){
-                    $foto_perfil = $request->input('avatar');
+                if($foto_perfil = $request->file('avatar')){
+                    $destino = 'img/';
+                    $origen = $foto_perfil->getClientOriginalName();
+                    $foto_perfil->move($destino, $origen); 
                 }else if($request->input('img-elegida') != ""){
                     $foto_perfil = $request->input('img-elegida');
+                    $origen = $foto_perfil;
                 }else{
                     $foto_perfil = auth()->user()->foto_perfil;
+                    $origen = $foto_perfil;
                 }
 
                 User::where('email',auth()->user()->email)
                       ->update(array('name'=> $request->input('name'),
                                      'facebook'=> $request->input('urlFB'),
-                                     'foto_perfil'=> $foto_perfil));
+                                     'foto_perfil'=> $origen));
                 return redirect()->route('home');
 
             case 2:
                 break;
             default:
-                breaK;
+                break;
         }
     }
 

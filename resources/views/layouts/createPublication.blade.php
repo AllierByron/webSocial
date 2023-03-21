@@ -15,7 +15,7 @@
     <div id="contenido">
         <h1>Publica</h1>
         <br>
-        <form action="{{asset('/createPublication')}}" method="POST">
+        <form action="{{asset('/createPublication')}}" method="POST" enctype="multipart/form-data">
             <div id="campos-editables">
                 @csrf
                 <input type="hidden" name="forumID" id="forumID" value="{{session('forum')->id}}">
@@ -27,7 +27,7 @@
                 <input type="text" name="postDesc" id="urlFB" value="">
                 <br><br>
                 <label for="content">URL(img, videos, gifs) </label>
-                <input type="text" id="content" name="content" value="">
+                <input type="file" id="content" name="content[]" value="" multiple>
                 <br><br>
                 <button formmethod="POST">Publicar</button>
             </div>

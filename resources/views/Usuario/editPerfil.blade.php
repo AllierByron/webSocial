@@ -13,9 +13,9 @@
     <div id="contenido">
         <h1>Editar Perfil</h1>
         <br>
-        <form action="{{asset('/update/1')}}" method="POST">
+        <form action="{{asset('/update/1')}}" method="POST" enctype="multipart/form-data">
+            @csrf
             <div id="campos-editables">
-                @csrf
                 <label for="name">Nombre del perfil: </label>
                 <input type="text" name="name" id="name" value="{{auth()->user()->name}}">
                 <br><br>
@@ -27,7 +27,7 @@
                     manera el enlace funcionara de la manera correcta.
                 </p>
                 <br>
-                <img id="img-editProfile" src="{{auth()->user()->foto_perfil}}" alt=""  width="150px" height="150px" class="imgs-genericas">
+                <img id="img-editProfile" src="{{asset('img/'.auth()->user()->foto_perfil)}}" alt=""  width="150px" height="150px" class="imgs-genericas">
                 <br>
                 <p onclick="popupInS();" style="cursor: pointer;" id="edit-pp">Editar foto de perfil</p>
                 @include('elegirFoto')
