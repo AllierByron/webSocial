@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\controllerPruebas;
 use App\Models\User;
 use App\Models\forum;
 use GuzzleHttp\Promise\Create;
@@ -49,6 +50,7 @@ Route::get('/auth/{id}/callback','App\Http\Controllers\UserController@store');
 Route::get('/crUsuario/{id}','App\Http\Controllers\UserController@create');
 Route::post('/isUsuario/{id}','App\Http\Controllers\UserController@show');
 Route::post('/outUsuario','App\Http\Controllers\UserController@logout');
+Route::post('/update/{id}/{user_id}','App\Http\Controllers\UserController@update')->name('update');
 /* temrmino de las rutas para la conexion a google y FB */
 
 Route::view('/publicationMeme','layouts/publicationMeme')->name('publi');
@@ -78,7 +80,13 @@ Route::view('/definePublication', 'layouts/createPublication')->name('crPubli');
 
 // Route::get('/posts/{id}','');
 
-Route::post('/update/{id}','App\Http\Controllers\UserController@update')->name('update');
 Route::view('/contactos', 'Exteriores/contactos')->name('cntc');
 Route::view('/imagenLocal', 'img/ImgLocal')->name('LRS');
 Route::view('/editUserStuff', 'Usuario/editPerfil')->name('editUserStuff');
+
+
+
+
+
+
+Route::post('/pruebaUserPubs', [controllerPruebas::class, 'fetchUsers']);

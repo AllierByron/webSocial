@@ -166,35 +166,45 @@ class PublicationController extends Controller
 
                 break;
             case 3:
-                $pubs = publication::where('publications.user_id',auth()->id())
-                                    ->where('publications.estado', 'Activo')
-                                    ->join('forums','forums.id','=','publications.forum_id')
-                                    ->join('users','users.id','=','publications.user_id')
-                                    ->select('publications.*','forums.nombre','users.name','users.foto_perfil')
-                                    ->get();
+                // $pubs = publication::where('publications.user_id',auth()->id())
+                //                     ->where('publications.estado', 'Activo')
+                //                     ->join('forums','forums.id','=','publications.forum_id')
+                //                     ->join('users','users.id','=','publications.user_id')
+                //                     ->select('publications.*','forums.nombre','users.name','users.foto_perfil')
+                //                     ->get();
 
-                if($pubs){
-                    session(['data'=>json_decode($pubs)]);
+                // if($pubs){
+                //     session(['data'=>json_decode($pubs)]);
                     
-                    foreach (session('data') as $deta) {
-                        $contenido = explode('/',$deta->contenido);
-                        // echo $contenido[0];
-                        if($contenido[0] != 'https:' && $contenido[0] != ""){
-                            // echo "Entre\n".$deta->id;
-                            $arrayTemp = [];
-                            $arrayContents = explode('fId'.$deta->forum_id.'pId'.$deta->id, $deta->contenido);
-                            for ($i = 0; $i < count($arrayContents)-1; $i++) {
-                                 $arrayTemp[$i] =  $arrayContents[$i];
-                            }
-                            $deta->contenido = $arrayTemp;
-                        }
-                        $deta->url = asset('/forum/2/'.$deta->forum_id);
-                    }
+                //     foreach (session('data') as $deta) {
+                //         $contenido = explode('/',$deta->contenido);
+                //         // echo $contenido[0];
+                //         if($contenido[0] != 'https:' && $contenido[0] != ""){
+                //             // echo "Entre\n".$deta->id;
+                //             $arrayTemp = [];
+                //             $arrayContents = explode('fId'.$deta->forum_id.'pId'.$deta->id, $deta->contenido);
+                //             for ($i = 0; $i < count($arrayContents)-1; $i++) {
+                //                  $arrayTemp[$i] =  $arrayContents[$i];
+                //             }
+                //             $deta->contenido = $arrayTemp;
+                //         }
+                //         $deta->url = asset('/forum/2/'.$deta->forum_id);
+                //     }
 
-                    // dd(session('data'));
+                //     // dd(session('data'));
+                // }else{
+                //     session(['data'=>""]);
+                // }   
+                // dd(session('session_token'));
+                if(session('session_token') !== null){
+                    $pubs = http::get('http://localhost:8000/api/showPubs/3/0/'.auth()->user()->id);
+                    $responseDecoded = json_decode($pubs);
+                    // dd($responseDecoded);
+                    return view('Usuario/perfil')->with('data',$responseDecoded->datos)
+                                                 ->with('imagen', $responseDecoded->avatar);
                 }else{
-                    session(['data'=>""]);
-                }   
+                    return "no tienes permiso";
+                }
                 // dd(session('data'));
                 return view('Usuario/perfil');
 

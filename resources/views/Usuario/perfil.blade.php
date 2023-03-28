@@ -52,7 +52,8 @@
     <div class="row">
         <div id="user" class="columnas"><!--izquierda-->
             @if(Auth::check()) 
-                <img src="{{asset('img/'.auth()->user()->foto_perfil)}}" alt="avatar" id="foto">
+                {{-- <img src="{{asset('img/'.auth()->user()->foto_perfil)}}" alt="avatar" id="foto"> --}}
+                <img src="{{$imagen}}" alt="avatar" id="foto">
                 <h1 id="nombre">{{auth()->user()->name}}</h1>
                 <a href="{{asset('editUserStuff')}}"><button id="btn-editarPerfil">Editar Perfil</button></a>
             @else 
@@ -75,8 +76,10 @@
                 <label class="filtro" for="likes" style="float: left;">Filtar por: </label>
                 <br><br>
                 @if(Auth::check())
-                    @if(count(session('data')) != 0)
-                        @foreach(session('data') as $d)
+                    {{-- @if(count(session('data')) != 0) --}}
+                    @if(isset($data))
+                        {{-- @foreach(session('data') as $d) --}}
+                        @foreach($data as $d)
                             <div id="contenedor-post" style="min-height: 100px; width: 100%; display: inline-block;">
                                 {{-- <div style="float: left; width: 50px; height: 50px; background-color:rgb(0, 0, 105); display: inline-block;"><img src="{{$d->foto_perfil}}" alt="" width= "50px" height="50px"></div> --}}
                                 <div id="contendor-publicacion-de-comunidad" style="background-color:rgb(10, 0, 82); min-height: 100px; width: 100%; display: inline-block; float:right;">

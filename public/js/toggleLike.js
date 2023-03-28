@@ -15,7 +15,7 @@ function like(className) {
                 }else if(keyword[3] == "upComment"){
                     document.getElementsByClassName(clase[3])[0].classList = "fa fa-heart "+datos[0].url+" "+datos[0].publication_id+" updateComm";
                 }
-
+                
             } catch (error) {
                 console.log(error);
             }

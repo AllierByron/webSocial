@@ -13,7 +13,7 @@
     <div id="contenido">
         <h1>Editar Perfil</h1>
         <br>
-        <form action="{{asset('/update/1')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{asset('/update/1/'.auth()->user()->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div id="campos-editables">
                 <label for="name">Nombre del perfil: </label>
