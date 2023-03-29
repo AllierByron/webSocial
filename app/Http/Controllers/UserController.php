@@ -195,7 +195,7 @@ class UserController extends Controller
                 // dd($responseDecoded);
                 if(isset($responseDecoded->token)){
                     
-                    session(['session_token', $responseDecoded->token]);
+                    session(['session_token'=> $responseDecoded->token]);
                     
                     Auth::loginUsingId(($responseDecoded->user_token));
                     return view('Usuario/perfil')->with('data',$responseDecoded->publicaciones->original->datos)
@@ -285,9 +285,9 @@ class UserController extends Controller
                 //                      'facebook'=> $request->input('urlFB'),
                 //                      'foto_perfil'=> $origen));
                 // return redirect()->route('home');
-                    
                 if(session('session_token') !== null){
-                    $user = http::post('http://localhost:8000/api/updateUser/1/'.$user_id,[
+                    $user = http::withHeaders([ 'Authorization' => 'Bearer '.session('session_token') ])
+                    ->post('http://localhost:8000/api/updateUser/1/'.$user_id,[
                         'avatar' => $request->file('avatar'),
                         'img-elegida' => $request->input('img-elegida'),
                         'name' => $request->input('name'),

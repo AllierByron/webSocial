@@ -196,8 +196,11 @@ class PublicationController extends Controller
                 //     session(['data'=>""]);
                 // }   
                 // dd(session('session_token'));
+                // dd(session('session_token'));
+
                 if(session('session_token') !== null){
-                    $pubs = http::get('http://localhost:8000/api/showPubs/3/0/'.auth()->user()->id);
+                    $pubs = http::withHeaders([ 'Authorization' => 'Bearer '.session('session_token') ])
+                    ->get('http://localhost:8000/api/showPubs/3/0/'.auth()->user()->id);
                     $responseDecoded = json_decode($pubs);
                     // dd($responseDecoded);
                     return view('Usuario/perfil')->with('data',$responseDecoded->datos)

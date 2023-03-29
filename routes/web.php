@@ -90,3 +90,4 @@ Route::view('/editUserStuff', 'Usuario/editPerfil')->name('editUserStuff');
 
 
 Route::post('/pruebaUserPubs', [controllerPruebas::class, 'fetchUsers']);
+
